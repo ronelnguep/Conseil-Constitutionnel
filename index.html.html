@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Constitution expliquée à tous — Guide Citoyen Tchad</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,400&family=Outfit:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bleu:#1A2E8F;--bleu-vif:#2E52C8;--or:#F2C11E;--rouge:#C8102E;
+  --vert:#1B7A4A;--violet:#6B3FA0;--orange:#E07A00;--teal:#007A8C;
+  --bg:#FAFAF7;--card:#FFFFFF;--texte:#1C1E2E;--gris:#6B6E84;
+  --gris-clair:#F0F1F5;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--texte);overflow-x:hidden}
+html[lang="ar"] body{font-family:'Noto Naskh Arabic',serif;direction:rtl}
+html[lang="ar"] .section-tag::before{order:2}
+html[lang="ar"] .droit-item:hover{transform:translateX(-4px)}
+html[lang="ar"] .tl-card:hover{transform:translateX(-4px)}
+html[lang="ar"] .principes-callout{border-left:none;border-right:4px solid var(--bleu);border-radius:12px 0 0 12px}
+html[lang="ar"] .devoirs-callout{border-left:none;border-right:4px solid var(--bleu);border-radius:12px 0 0 12px}
+html[lang="ar"] .callout{border-left:none;border-right:4px solid var(--or)}
+html[lang="ar"] .droit-item{border-left:none;border-right:4px solid transparent}
+html[lang="ar"] .timeline{padding-left:0;padding-right:60px}
+html[lang="ar"] .timeline::before{left:auto;right:20px}
+html[lang="ar"] .tl-dot{left:auto;right:-48px}
+html[lang="ar"] .pv-col{border-right:none;border-left:1px solid rgba(255,255,255,.08)}
+html[lang="ar"] .pv-col:last-child{border-left:none}
+html[lang="ar"] .hero-title{direction:rtl}
+html[lang="ar"] .section-tag{flex-direction:row-reverse}
+
+/* ===== LANG SWITCHER ===== */
+.lang-switcher{
+  position:fixed;top:16px;right:16px;z-index:999;
+  display:flex;align-items:center;gap:6px;
+  background:rgba(26,46,143,.95);backdrop-filter:blur(12px);
+  border:1px solid rgba(242,193,30,.4);border-radius:50px;
+  padding:6px 8px;
+  box-shadow:0 4px 24px rgba(0,0,0,.3);
+}
+html[lang="ar"] .lang-switcher{right:auto;left:16px}
+.lang-btn{
+  padding:5px 14px;border-radius:50px;font-size:12px;font-weight:700;
+  letter-spacing:1px;cursor:pointer;border:none;transition:all .2s;
+  color:rgba(255,255,255,.5);background:transparent;font-family:'Outfit',sans-serif;
+}
+.lang-btn.active{background:var(--or);color:var(--bleu);}
+.lang-btn:hover:not(.active){color:white;}
+.lang-divider{width:1px;height:16px;background:rgba(255,255,255,.2)}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;background:var(--bleu);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 20px;text-align:center;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%,rgba(242,193,30,.15),transparent 55%),
+    radial-gradient(ellipse 40% 50% at 90% 80%,rgba(200,16,46,.08),transparent 50%),
+    radial-gradient(ellipse 30% 40% at 5% 60%,rgba(46,82,200,.3),transparent 50%);
+}
+.hero-circles{position:absolute;inset:0;pointer-events:none}
+.hero-circles span{
+  position:absolute;border-radius:50%;border:1px solid rgba(242,193,30,.12);
+  animation:pulse 4s ease-in-out infinite;
+}
+.hero-circles span:nth-child(1){width:600px;height:600px;top:-200px;left:-200px;animation-delay:0s}
+.hero-circles span:nth-child(2){width:400px;height:400px;bottom:-100px;right:-100px;animation-delay:1.5s}
+.hero-circles span:nth-child(3){width:250px;height:250px;top:50%;right:10%;animation-delay:3s}
+@keyframes pulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.7;transform:scale(1.05)}}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(242,193,30,.15);border:1px solid rgba(242,193,30,.4);
+  border-radius:50px;padding:8px 20px;margin-bottom:32px;
+  font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--or);
+  animation:fadeDown .8s ease both;
+}
+.hero-title{
+  font-family:'Fraunces',serif;font-size:clamp(42px,7vw,80px);font-weight:900;
+  color:#fff;line-height:1.05;margin-bottom:16px;
+  animation:fadeDown .8s .2s ease both;
+}
+html[lang="ar"] .hero-title{font-family:'Noto Naskh Arabic',serif;font-size:clamp(36px,6vw,70px)}
+.hero-title em{color:var(--or);font-style:normal}
+.hero-sub{
+  font-size:clamp(15px,2.5vw,20px);color:rgba(255,255,255,.65);
+  max-width:560px;line-height:1.6;margin-bottom:16px;font-weight:300;
+  animation:fadeDown .8s .3s ease both;
+}
+.hero-meta{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:40px;letter-spacing:.5px;animation:fadeDown .8s .35s ease both;}
+.hero-stats{display:flex;gap:40px;justify-content:center;margin-bottom:48px;animation:fadeDown .8s .4s ease both;}
+.hero-stat{text-align:center}
+.hero-stat .num{font-family:'Fraunces',serif;font-size:40px;font-weight:900;color:var(--or);line-height:1}
+.hero-stat .lbl{font-size:11px;color:rgba(255,255,255,.45);letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:48px;animation:fadeDown .8s .45s ease both}
+.chip{
+  padding:6px 14px;border-radius:50px;font-size:11px;font-weight:700;
+  letter-spacing:.5px;text-transform:uppercase;cursor:pointer;
+  transition:all .2s;text-decoration:none;
+  background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.15);
+}
+.chip:hover{background:var(--or);color:var(--bleu);border-color:var(--or)}
+html[lang="ar"] .chip{letter-spacing:0;font-size:12px}
+.hero-loi{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.5px;animation:fadeDown .8s .5s ease both;}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);animation:bob 2s ease infinite}
+.hero-scroll span{display:block;width:2px;height:40px;background:linear-gradient(var(--or),transparent);margin:0 auto}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== NAV ===== */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(26,46,143,.97);backdrop-filter:blur(12px);
+  padding:0 24px;border-bottom:2px solid var(--or);
+}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:2px;overflow-x:auto;padding:10px 0}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-btn{
+  white-space:nowrap;padding:7px 13px;border-radius:6px;
+  font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  color:rgba(255,255,255,.6);background:transparent;border:none;cursor:pointer;
+  transition:all .2s;text-decoration:none;
+}
+html[lang="ar"] .nav-btn{font-family:'Noto Naskh Arabic',serif;font-size:13px;letter-spacing:0}
+.nav-btn:hover,.nav-btn.active{background:var(--or);color:var(--bleu)}
+
+/* ===== LAYOUT ===== */
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+.section{padding:80px 0}
+.section-tag{font-size:11px;font-weight:800;letter-spacing:4px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.section-tag::before{content:'';width:32px;height:3px;border-radius:2px;background:currentColor;flex-shrink:0}
+html[lang="ar"] .section-tag{letter-spacing:0;font-size:12px}
+.section-title{font-family:'Fraunces',serif;font-size:clamp(28px,4vw,44px);font-weight:900;line-height:1.1;margin-bottom:16px}
+html[lang="ar"] .section-title{font-family:'Noto Naskh Arabic',serif}
+.section-intro{font-size:16px;color:var(--gris);line-height:1.7;max-width:680px;margin-bottom:48px;font-weight:300}
+.text-bleu{color:var(--bleu)}.text-or{color:var(--or)}.text-rouge{color:var(--rouge)}
+.callout{margin-top:40px;padding:20px 24px;border-radius:12px;border-left:4px solid var(--or);background:rgba(242,193,30,.06);}
+.callout strong{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--or);display:block;margin-bottom:6px}
+.callout p{font-size:14px;color:var(--gris);line-height:1.7}
+
+/* ===== 01 PREAMBLE ===== */
+.preamb-section{background:linear-gradient(135deg,#0D1B5E 0%,#1A2E8F 60%,#1B3A6B 100%);padding:80px 0}
+.preamb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.preamb-card{background:rgba(255,255,255,.06);border:1px solid rgba(242,193,30,.2);border-radius:16px;padding:28px;color:white;transition:all .3s;cursor:default;}
+.preamb-card:hover{background:rgba(255,255,255,.1);transform:translateY(-4px);border-color:rgba(242,193,30,.5)}
+.preamb-icon{font-size:32px;margin-bottom:14px}
+.preamb-card-title{font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--or);margin-bottom:8px}
+html[lang="ar"] .preamb-card-title{font-family:'Noto Naskh Arabic',serif}
+.preamb-art{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px}
+.preamb-card-text{font-size:13px;line-height:1.7;color:rgba(255,255,255,.65)}
+.preamb-callout{margin-top:36px;background:rgba(242,193,30,.08);border:1px solid rgba(242,193,30,.25);border-radius:12px;padding:20px 24px;color:white;}
+.preamb-callout strong{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--or);display:block;margin-bottom:6px}
+.preamb-callout p{font-size:13px;line-height:1.65;color:rgba(255,255,255,.6)}
+
+/* ===== 02 PRINCIPES ===== */
+.principes-section{background:var(--bg)}
+.principes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.principe-card{border-radius:20px;padding:36px 28px;position:relative;overflow:hidden;transition:all .3s;cursor:default;}
+.principe-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.principe-card .numero{font-family:'Fraunces',serif;font-size:80px;font-weight:900;position:absolute;top:-10px;right:16px;opacity:.08;line-height:1;}
+html[lang="ar"] .principe-card .numero{right:auto;left:16px}
+.principe-card .icon{font-size:36px;margin-bottom:14px}
+.principe-card h3{font-family:'Fraunces',serif;font-size:20px;font-weight:700;margin-bottom:8px}
+html[lang="ar"] .principe-card h3{font-family:'Noto Naskh Arabic',serif}
+.principe-card .art{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.5;margin-bottom:8px}
+.principe-card p{font-size:13px;line-height:1.7;opacity:.85}
+.pc-blue{background:var(--bleu);color:white}.pc-or{background:var(--or);color:var(--bleu)}.pc-rouge{background:var(--rouge);color:white}.pc-vert{background:var(--vert);color:white}.pc-violet{background:var(--violet);color:white}.pc-teal{background:var(--teal);color:white}
+.principes-callout{margin-top:36px;background:rgba(26,46,143,.06);border-left:4px solid var(--bleu);border-radius:0 12px 12px 0;padding:20px 24px;}
+.principes-callout strong{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--bleu);display:block;margin-bottom:6px}
+.principes-callout p{font-size:13px;color:var(--gris);line-height:1.7}
+
+/* ===== 03 DROITS ===== */
+.droits-section{background:#F8F4EE}
+.droits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.droit-item{background:white;border-radius:14px;padding:22px;display:flex;gap:14px;align-items:flex-start;border-left:4px solid transparent;transition:all .25s;cursor:default;box-shadow:0 2px 12px rgba(0,0,0,.04);}
+.droit-item:hover{transform:translateX(4px);box-shadow:0 8px 32px rgba(0,0,0,.08)}
+.droit-item.cat-liberte{border-color:var(--bleu-vif)}.droit-item.cat-social{border-color:var(--vert)}.droit-item.cat-judiciaire{border-color:var(--or)}.droit-item.cat-propriete{border-color:var(--orange)}.droit-item.cat-femmes{border-color:var(--violet)}
+.droit-emoji{font-size:26px;flex-shrink:0;margin-top:2px}
+.droit-title{font-weight:800;font-size:14px;color:var(--texte);margin-bottom:3px}
+.droit-article{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gris);margin-bottom:5px}
+.droit-text{font-size:12px;color:var(--gris);line-height:1.6}
+.droits-callout{margin-top:32px;background:rgba(200,16,46,.04);border:1px solid rgba(200,16,46,.15);border-radius:12px;padding:20px 24px;}
+.droits-callout strong{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--rouge);display:block;margin-bottom:6px}
+.droits-callout p{font-size:13px;color:var(--gris);line-height:1.7}
+
+/* ===== 04 POUVOIRS ===== */
+.pouvoirs-section{background:var(--bleu);padding:80px 0}
+.pouvoirs-table{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(255,255,255,.12);border-radius:20px;overflow:hidden}
+.pv-col{padding:32px 28px;border-right:1px solid rgba(255,255,255,.08)}
+.pv-col:last-child{border-right:none}
+.pv-header{text-align:center;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid rgba(255,255,255,.1)}
+.pv-icon{font-size:36px;margin-bottom:12px}
+.pv-title{font-family:'Fraunces',serif;font-size:22px;font-weight:900;color:var(--or);margin-bottom:6px}
+html[lang="ar"] .pv-title{font-family:'Noto Naskh Arabic',serif}
+.pv-tagline{font-size:12px;color:rgba(255,255,255,.4);font-style:italic;line-height:1.5}
+.pv-institution{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px;margin-bottom:12px;color:white;}
+.pv-institution:last-child{margin-bottom:0}
+.pv-inst-name{font-weight:800;font-size:14px;color:rgba(255,255,255,.9);margin-bottom:4px}
+.pv-inst-text{font-size:12px;color:rgba(255,255,255,.45);line-height:1.6}
+.pouvoirs-callout{margin-top:32px;background:rgba(242,193,30,.08);border:1px solid rgba(242,193,30,.2);border-radius:12px;padding:20px 24px;color:white;}
+.pouvoirs-callout strong{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--or);display:block;margin-bottom:6px}
+.pouvoirs-callout p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.7}
+
+/* ===== 05 CONSEIL CONST. ===== */
+.cc-section{background:linear-gradient(160deg,#0D1B5E 0%,#1A2E8F 40%,#0D1B5E 100%);padding:80px 0}
+.cc-stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:48px}
+.cc-stat{background:rgba(242,193,30,.08);border:1px solid rgba(242,193,30,.2);border-radius:14px;padding:20px;text-align:center;color:white;}
+.cc-stat .big{font-family:'Fraunces',serif;font-size:44px;font-weight:900;color:var(--or);line-height:1}
+.cc-stat .label{font-size:11px;color:rgba(255,255,255,.4);margin-top:6px;line-height:1.4}
+.cc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:36px}
+.cc-mission{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:22px;color:white;transition:all .25s;}
+.cc-mission:hover{background:rgba(255,255,255,.09);border-color:rgba(242,193,30,.35);transform:translateY(-3px)}
+.cc-num{font-family:'Fraunces',serif;font-size:32px;font-weight:900;color:var(--or);opacity:.4;line-height:1;margin-bottom:10px}
+.cc-mission-title{font-weight:800;font-size:14px;color:var(--or);margin-bottom:6px}
+.cc-mission-art{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:8px}
+.cc-mission-text{font-size:12px;color:rgba(255,255,255,.55);line-height:1.6}
+.cc-saisir{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px;margin-bottom:32px}
+.cc-saisir h3{font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:white;margin-bottom:20px}
+html[lang="ar"] .cc-saisir h3{font-family:'Noto Naskh Arabic',serif}
+.cc-saisir-list{display:flex;flex-direction:column;gap:12px}
+.cc-saisir-item{display:flex;gap:14px;align-items:flex-start;padding:14px;background:rgba(255,255,255,.04);border-radius:10px;border:1px solid rgba(255,255,255,.06)}
+.cc-saisir-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.cc-saisir-text{font-size:13px;color:rgba(255,255,255,.55);line-height:1.6}
+.cc-saisir-text strong{color:rgba(255,255,255,.85);font-weight:700}
+.cc-callout{background:rgba(242,193,30,.06);border:1px solid rgba(242,193,30,.2);border-radius:12px;padding:20px 24px;}
+.cc-callout strong{font-size:11px;letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:6px;color:white}
+.cc-callout p{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7}
+
+/* ===== 06 ELECTION ===== */
+.electoral-section{background:var(--bg);padding:80px 0}
+.timeline{position:relative;padding-left:60px}
+.timeline::before{content:'';position:absolute;left:20px;top:0;bottom:0;width:2px;background:linear-gradient(var(--or),rgba(242,193,30,.1))}
+.tl-step{position:relative;margin-bottom:32px}
+.tl-step:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-48px;width:36px;height:36px;background:var(--bleu);border:3px solid var(--or);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:14px;font-weight:900;color:var(--or);top:16px;}
+.tl-card{background:white;border-radius:14px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,.05);border:1px solid var(--gris-clair);transition:all .25s;}
+.tl-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.09);transform:translateX(4px)}
+.tl-title{font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--bleu);margin-bottom:10px}
+html[lang="ar"] .tl-title{font-family:'Noto Naskh Arabic',serif}
+.tl-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+.tl-list li{font-size:13px;color:var(--gris);line-height:1.6;display:flex;gap:8px}
+.tl-list li::before{content:'·';color:var(--or);font-size:20px;line-height:1;flex-shrink:0}
+
+/* ===== 07 DEVOIRS ===== */
+.devoirs-section{background:#F0F4FF;padding:80px 0}
+.devoirs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:36px}
+.devoir-card{background:white;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.04);transition:all .25s;cursor:default;border-top:3px solid var(--bleu);}
+.devoir-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.1)}
+.devoir-icon{font-size:32px;margin-bottom:14px}
+.devoir-title{font-weight:800;font-size:14px;color:var(--texte);margin-bottom:4px}
+.devoir-art{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gris);margin-bottom:8px}
+.devoir-text{font-size:12px;color:var(--gris);line-height:1.65}
+.devoirs-callout{background:white;border-left:4px solid var(--bleu);border-radius:0 12px 12px 0;padding:20px 24px;box-shadow:0 2px 12px rgba(0,0,0,.04);}
+.devoirs-callout strong{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--bleu);display:block;margin-bottom:6px}
+.devoirs-callout p{font-size:13px;color:var(--gris);line-height:1.7}
+
+/* ===== 08 INSTITUTIONS ===== */
+.institutions-section{background:var(--bg);padding:80px 0}
+.inst-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.inst-card{background:white;border-radius:14px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.04);border-bottom:3px solid transparent;transition:all .25s;}
+.inst-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.09)}
+.inst-card.ic-exec{border-color:var(--or)}.inst-card.ic-legis{border-color:var(--bleu)}.inst-card.ic-judic{border-color:var(--rouge)}.inst-card.ic-ctrl{border-color:var(--vert)}.inst-card.ic-ind{border-color:var(--violet)}.inst-card.ic-cons{border-color:var(--teal)}
+.inst-icon{font-size:28px;margin-bottom:12px}
+.inst-name{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--texte);margin-bottom:4px}
+html[lang="ar"] .inst-name{font-family:'Noto Naskh Arabic',serif}
+.inst-art{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gris);margin-bottom:8px}
+.inst-text{font-size:12px;color:var(--gris);line-height:1.65}
+.inst-badge{display:inline-block;margin-top:10px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:var(--gris-clair);color:var(--gris);}
+
+/* ===== 09 VIE ===== */
+.vie-section{background:#F8F4EE;padding:80px 0}
+.vie-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.vie-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.05);transition:all .3s;}
+.vie-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.1)}
+.vie-header{padding:20px 22px;position:relative}
+.vie-header.vh-bleu{background:var(--bleu)}.vie-header.vh-or{background:var(--or)}.vie-header.vh-rouge{background:var(--rouge)}.vie-header.vh-vert{background:var(--vert)}.vie-header.vh-violet{background:var(--violet)}.vie-header.vh-teal{background:var(--teal)}
+.vie-emoji{font-size:28px;margin-bottom:8px}
+.vie-scenario{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:white;margin-bottom:2px}
+html[lang="ar"] .vie-scenario{font-family:'Noto Naskh Arabic',serif}
+.vie-droit{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.vie-header.vh-or .vie-scenario{color:var(--bleu)}.vie-header.vh-or .vie-droit{color:rgba(26,46,143,.5)}
+.vie-body{padding:20px 22px}
+.vie-points{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.vie-points li{font-size:12px;color:var(--gris);line-height:1.6;display:flex;gap:8px}
+.vie-points li::before{content:'✓';color:var(--vert);font-weight:800;flex-shrink:0}
+.vie-recours{font-size:11px;color:var(--gris);background:var(--gris-clair);border-radius:8px;padding:10px 12px;line-height:1.5;font-style:italic}
+
+/* ===== 10 LEXIQUE ===== */
+.lexique-section{background:var(--bleu);padding:80px 0}
+.lexique-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.lexique-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:22px;color:white;transition:all .25s;}
+.lexique-item:hover{background:rgba(255,255,255,.09);border-color:rgba(242,193,30,.3);transform:translateY(-3px)}
+.lex-term{font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--or);margin-bottom:8px}
+html[lang="ar"] .lex-term{font-family:'Noto Naskh Arabic',serif}
+.lex-text{font-size:13px;color:rgba(255,255,255,.55);line-height:1.65}
+
+/* ===== FOOTER ===== */
+.footer{background:#0D1B5E;padding:48px 24px;text-align:center}
+.footer-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:white;margin-bottom:8px}
+html[lang="ar"] .footer-title{font-family:'Noto Naskh Arabic',serif}
+.footer-sub{font-size:13px;color:rgba(255,255,255,.35);max-width:560px;margin:0 auto 16px;line-height:1.7}
+.footer-meta{font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.5px}
+
+/* ===== ANIMATIONS ===== */
+.fade-in{opacity:0;transform:translateY(20px);transition:all .6s ease}
+.fade-in.visible{opacity:1;transform:none}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .preamb-grid,.droits-grid,.principes-grid,.pouvoirs-table,.cc-grid,.inst-grid,.vie-grid,.lexique-grid{grid-template-columns:repeat(2,1fr)}
+  .cc-stats-row,.devoirs-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .preamb-grid,.droits-grid,.principes-grid,.pouvoirs-table,.cc-grid,.cc-stats-row,.devoirs-grid,.inst-grid,.vie-grid,.lexique-grid{grid-template-columns:1fr}
+  .hero-stats{gap:24px}
+  .timeline{padding-left:44px}
+  html[lang="ar"] .timeline{padding-left:0;padding-right:44px}
+}
+@media print{
+  *{animation:none!important;transition:none!important}
+  .nav,.hero-scroll,.lang-switcher{display:none!important}
+  .hero{page-break-before:avoid;break-before:avoid;min-height:auto;padding:60px 40px}
+  .preamb-section,.principes-section,.droits-section,.pouvoirs-section,.cc-section,.electoral-section,.devoirs-section,.institutions-section,.vie-section,.lexique-section{page-break-before:always;break-before:page}
+  .preamb-card,.principe-card,.droit-item,.pv-institution,.cc-mission,.tl-card,.devoir-card,.inst-card,.vie-card,.lexique-item{page-break-inside:avoid;break-inside:avoid}
+  .hero,.preamb-section,.pouvoirs-section,.cc-section,.lexique-section{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{size:A4;margin:15mm}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== LANG SWITCHER ===== -->
+<div class="lang-switcher">
+  <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">🇫🇷 Français</button>
+  <div class="lang-divider"></div>
+  <button class="lang-btn" id="btn-ar" onclick="setLang('ar')">🇹🇩 العربية</button>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="accueil">
+  <div class="hero-bg"></div>
+  <div class="hero-circles"><span></span><span></span><span></span></div>
+  <div style="position:relative;z-index:1">
+    <div class="hero-badge" data-fr="🇹🇩 &nbsp;Guide Citoyen · Constitution Révisée · Octobre 2025" data-ar="🇹🇩 &nbsp;دليل المواطن · الدستور المُعدَّل · أكتوبر 2025">🇹🇩 &nbsp;Guide Citoyen · Constitution Révisée · Octobre 2025</div>
+    <h1 class="hero-title"><span data-fr="La Constitution" data-ar="الدستور">La Constitution</span><br><em data-fr="expliquée à tous" data-ar="مشروحًا للجميع">expliquée à tous</em></h1>
+    <p class="hero-sub" data-fr="Comprendre vos droits, vos devoirs et vos institutions — simplement et clairement." data-ar="افهم حقوقك وواجباتك ومؤسساتك — ببساطة ووضوح.">Comprendre vos droits, vos devoirs et vos institutions — simplement et clairement.</p>
+    <p class="hero-meta" data-fr="Loi N° 001/PC/2025 · Adoptée 17 déc. 2023 · Révisée 03 oct. 2025 · Promulguée 08 oct. 2025" data-ar="القانون رقم 001/PC/2025 · اعتُمد 17 ديسمبر 2023 · عُدِّل 3 أكتوبر 2025 · صدر 8 أكتوبر 2025">Loi N° 001/PC/2025 · Adoptée 17 déc. 2023 · Révisée 03 oct. 2025 · Promulguée 08 oct. 2025</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">285</div><div class="lbl" data-fr="Articles" data-ar="مادة">Articles</div></div>
+      <div class="hero-stat"><div class="num">23</div><div class="lbl" data-fr="Titres" data-ar="بابًا">Titres</div></div>
+      <div class="hero-stat"><div class="num">2025</div><div class="lbl" data-fr="Révision" data-ar="تعديل">Révision</div></div>
+    </div>
+    <div class="hero-chips">
+      <a class="chip" href="#preambule" data-fr="01 Préambule" data-ar="01 الديباجة">01 Préambule</a>
+      <a class="chip" href="#principes" data-fr="02 Principes" data-ar="02 المبادئ">02 Principes</a>
+      <a class="chip" href="#droits" data-fr="03 Droits" data-ar="03 الحقوق">03 Droits</a>
+      <a class="chip" href="#pouvoirs" data-fr="04 Pouvoirs" data-ar="04 السلطات">04 Pouvoirs</a>
+      <a class="chip" href="#conseil" data-fr="05 Conseil Constit." data-ar="05 المجلس الدستوري">05 Conseil Constit.</a>
+      <a class="chip" href="#election" data-fr="06 Élection" data-ar="06 الانتخابات">06 Élection</a>
+      <a class="chip" href="#devoirs" data-fr="07 Devoirs" data-ar="07 الواجبات">07 Devoirs</a>
+      <a class="chip" href="#institutions" data-fr="08 Institutions" data-ar="08 المؤسسات">08 Institutions</a>
+      <a class="chip" href="#vie" data-fr="09 Dans votre vie" data-ar="09 في حياتك">09 Dans votre vie</a>
+      <a class="chip" href="#lexique" data-fr="10 Lexique" data-ar="10 المصطلحات">10 Lexique</a>
+    </div>
+    <p class="hero-loi" data-fr="Conseil Constitutionnel — République du Tchad · Usage pédagogique" data-ar="المجلس الدستوري — جمهورية تشاد · للاستخدام التعليمي">Conseil Constitutionnel — République du Tchad · Usage pédagogique</p>
+  </div>
+  <div class="hero-scroll"><span></span></div>
+</section>
+
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-btn" href="#preambule" data-fr="01 · Préambule" data-ar="01 · الديباجة">01 · Préambule</a>
+    <a class="nav-btn" href="#principes" data-fr="02 · Principes" data-ar="02 · المبادئ">02 · Principes</a>
+    <a class="nav-btn" href="#droits" data-fr="03 · Droits" data-ar="03 · الحقوق">03 · Droits</a>
+    <a class="nav-btn" href="#pouvoirs" data-fr="04 · Pouvoirs" data-ar="04 · السلطات">04 · Pouvoirs</a>
+    <a class="nav-btn" href="#conseil" data-fr="05 · Conseil Constit." data-ar="05 · المجلس الدستوري">05 · Conseil Constit.</a>
+    <a class="nav-btn" href="#election" data-fr="06 · Élection" data-ar="06 · الانتخابات">06 · Élection</a>
+    <a class="nav-btn" href="#devoirs" data-fr="07 · Devoirs" data-ar="07 · الواجبات">07 · Devoirs</a>
+    <a class="nav-btn" href="#institutions" data-fr="08 · Institutions" data-ar="08 · المؤسسات">08 · Institutions</a>
+    <a class="nav-btn" href="#vie" data-fr="09 · Dans votre vie" data-ar="09 · في حياتك">09 · Dans votre vie</a>
+    <a class="nav-btn" href="#lexique" data-fr="10 · Lexique" data-ar="10 · المصطلحات">10 · Lexique</a>
+  </div>
+</nav>
+
+<!-- ===== 01 PRÉAMBULE ===== -->
+<section class="preamb-section" id="preambule">
+  <div class="container">
+    <div class="section-tag" style="color:var(--or)" data-fr="01 · Préambule" data-ar="01 · الديباجة">01 · Préambule</div>
+    <h2 class="section-title" style="color:white"><span data-fr="La Voix du " data-ar="صوت ">La Voix du </span><em style="color:var(--or);font-style:normal" data-fr="Peuple" data-ar="الشعب">Peuple</em></h2>
+    <p class="section-intro" style="color:rgba(255,255,255,.5)" data-fr="Le Préambule, c'est la voix du peuple. Il énonce les engagements solennels des Tchadiens envers eux-mêmes et envers le monde. Il fait partie intégrante de la Constitution et possède la même valeur juridique que ses articles." data-ar="الديباجة هي صوت الشعب. تُعلن التزامات التشاديين الرسمية تجاه أنفسهم وتجاه العالم. وهي جزء لا يتجزأ من الدستور وتحمل القيمة القانونية ذاتها لمواده.">Le Préambule, c'est la voix du peuple. Il énonce les engagements solennels des Tchadiens envers eux-mêmes et envers le monde. Il fait partie intégrante de la Constitution et possède la même valeur juridique que ses articles.</p>
+    <div class="preamb-grid fade-in">
+      <div class="preamb-card">
+        <div class="preamb-icon">🌍</div>
+        <div class="preamb-art">Art. 1</div>
+        <div class="preamb-card-title" data-fr="Droits de l'Homme" data-ar="حقوق الإنسان">Droits de l'Homme</div>
+        <div class="preamb-card-text" data-fr="Le peuple tchadien réaffirme son attachement aux droits de l'Homme tels que définis par les textes internationaux ratifiés par le Tchad." data-ar="يؤكد الشعب التشادي من جديد تمسكه بحقوق الإنسان كما تُعرّفها الصكوك الدولية التي صادقت عليها تشاد.">Le peuple tchadien réaffirme son attachement aux droits de l'Homme tels que définis par les textes internationaux ratifiés par le Tchad.</div>
+      </div>
+      <div class="preamb-card">
+        <div class="preamb-icon">🕊️</div>
+        <div class="preamb-art">Art. 1</div>
+        <div class="preamb-card-title" data-fr="Paix & Unité nationale" data-ar="السلام والوحدة الوطنية">Paix & Unité nationale</div>
+        <div class="preamb-card-text" data-fr="Le Tchad s'engage à défendre son unité nationale, sa diversité culturelle et à œuvrer pour la paix régionale et internationale." data-ar="تلتزم تشاد بالدفاع عن وحدتها الوطنية وتنوعها الثقافي والعمل من أجل السلام الإقليمي والدولي.">Le Tchad s'engage à défendre son unité nationale, sa diversité culturelle et à œuvrer pour la paix régionale et internationale.</div>
+      </div>
+      <div class="preamb-card">
+        <div class="preamb-icon">🗳️</div>
+        <div class="preamb-art">Art. 1</div>
+        <div class="preamb-card-title" data-fr="Démocratie pluraliste" data-ar="الديمقراطية التعددية">Démocratie pluraliste</div>
+        <div class="preamb-card-text" data-fr="Le Peuple tchadien s'engage à établir un État de droit fondé sur la démocratie pluraliste et le respect des libertés fondamentales." data-ar="يلتزم الشعب التشادي بإرساء دولة قانون قائمة على الديمقراطية التعددية واحترام الحريات الأساسية.">Le Peuple tchadien s'engage à établir un État de droit fondé sur la démocratie pluraliste et le respect des libertés fondamentales.</div>
+      </div>
+      <div class="preamb-card">
+        <div class="preamb-icon">🤝</div>
+        <div class="preamb-art">Art. 1</div>
+        <div class="preamb-card-title" data-fr="Solidarité africaine" data-ar="التضامن الأفريقي">Solidarité africaine</div>
+        <div class="preamb-card-text" data-fr="Le Tchad affirme son engagement pour l'intégration africaine et la coopération entre peuples fondée sur l'égalité et la solidarité." data-ar="تؤكد تشاد التزامها بالاندماج الأفريقي والتعاون بين الشعوب على أساس المساواة والتضامن.">Le Tchad affirme son engagement pour l'intégration africaine et la coopération entre peuples fondée sur l'égalité et la solidarité.</div>
+      </div>
+      <div class="preamb-card">
+        <div class="preamb-icon">⚖️</div>
+        <div class="preamb-art">Art. 1</div>
+        <div class="preamb-card-title" data-fr="Égalité femmes-hommes" data-ar="المساواة بين الجنسين">Égalité femmes-hommes</div>
+        <div class="preamb-card-text" data-fr="Le Peuple tchadien proclame son engagement pour l'égalité entre les femmes et les hommes dans tous les domaines de la vie publique." data-ar="يُعلن الشعب التشادي التزامه بالمساواة بين المرأة والرجل في جميع مجالات الحياة العامة.">Le Peuple tchadien proclame son engagement pour l'égalité entre les femmes et les hommes dans tous les domaines de la vie publique.</div>
+      </div>
+      <div class="preamb-card">
+        <div class="preamb-icon">🌱</div>
+        <div class="preamb-art">Art. 1</div>
+        <div class="preamb-card-title" data-fr="Développement durable" data-ar="التنمية المستدامة">Développement durable</div>
+        <div class="preamb-card-text" data-fr="Le Tchad s'engage à protéger l'environnement et à promouvoir un développement durable pour les générations présentes et futures." data-ar="تلتزم تشاد بحماية البيئة والنهوض بتنمية مستدامة لفائدة الأجيال الحاضرة والمستقبلية.">Le Tchad s'engage à protéger l'environnement et à promouvoir un développement durable pour les générations présentes et futures.</div>
+      </div>
+    </div>
+    <div class="preamb-callout fade-in">
+      <strong data-fr="À retenir" data-ar="للتذكر">À retenir</strong>
+      <p data-fr="Le Préambule fait partie intégrante de la Constitution. Ses engagements ont la même valeur juridique que les articles. Le Conseil Constitutionnel peut s'y référer pour évaluer la conformité d'une loi." data-ar="الديباجة جزء لا يتجزأ من الدستور. تحمل التزاماتها القيمة القانونية ذاتها للمواد. يمكن للمجلس الدستوري الاستناد إليها لتقييم مدى دستورية القانون.">Le Préambule fait partie intégrante de la Constitution. Ses engagements ont la même valeur juridique que les articles. Le Conseil Constitutionnel peut s'y référer pour évaluer la conformité d'une loi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 02 PRINCIPES ===== -->
+<section class="principes-section section" id="principes">
+  <div class="container">
+    <div class="section-tag" style="color:var(--bleu)" data-fr="02 · Titre I · Art. 1–13" data-ar="02 · الباب الأول · المواد 1–13">02 · Titre I · Art. 1–13</div>
+    <h2 class="section-title"><span data-fr="Les Principes " data-ar="المبادئ ">Les Principes </span><span class="text-bleu" data-fr="Fondamentaux" data-ar="الأساسية">Fondamentaux</span></h2>
+    <p class="section-intro" data-fr="Ce que le Tchad est dans sa nature profonde. Ces six principes constituent le socle de la République. Ils ne peuvent être supprimés, même par révision constitutionnelle." data-ar="ما يمثله تشاد في جوهره العميق. هذه المبادئ الست تُشكّل أساس الجمهورية. لا يمكن إلغاؤها حتى بالتعديل الدستوري.">Ce que le Tchad est dans sa nature profonde. Ces six principes constituent le socle de la République. Ils ne peuvent être supprimés, même par révision constitutionnelle.</p>
+    <div class="principes-grid fade-in">
+      <div class="principe-card pc-blue">
+        <div class="numero">1</div><div class="icon">🇹🇩</div>
+        <div class="art">Art. 1</div>
+        <h3 data-fr="Souverain" data-ar="السيادة">Souverain</h3>
+        <p data-fr="Le Tchad est une République souveraine. Il décide librement de son destin, sans ingérence extérieure." data-ar="تشاد جمهورية ذات سيادة. تقرر مصيرها بحرية دون أي تدخل خارجي.">Le Tchad est une République souveraine. Il décide librement de son destin, sans ingérence extérieure.</p>
+      </div>
+      <div class="principe-card pc-or">
+        <div class="numero">2</div><div class="icon">🕌</div>
+        <div class="art">Art. 1</div>
+        <h3 data-fr="Laïque" data-ar="العلمانية">Laïque</h3>
+        <p data-fr="Les religions sont séparées de l'État. Toutes sont respectées, aucune n'est officielle. L'État garantit la liberté de conscience." data-ar="الأديان مفصولة عن الدولة. جميعها محترمة ولا دين رسمي لها. تضمن الدولة حرية الضمير.">Les religions sont séparées de l'État. Toutes sont respectées, aucune n'est officielle. L'État garantit la liberté de conscience.</p>
+      </div>
+      <div class="principe-card pc-rouge">
+        <div class="numero">3</div><div class="icon">🤲</div>
+        <div class="art">Art. 1</div>
+        <h3 data-fr="Social" data-ar="الطابع الاجتماعي">Social</h3>
+        <p data-fr="L'État a le devoir de protéger les citoyens les plus vulnérables et de réduire les inégalités économiques et sociales." data-ar="تلتزم الدولة بحماية المواطنين الأكثر ضعفًا والحدّ من التفاوتات الاقتصادية والاجتماعية.">L'État a le devoir de protéger les citoyens les plus vulnérables et de réduire les inégalités économiques et sociales.</p>
+      </div>
+      <div class="principe-card pc-vert">
+        <div class="numero">4</div><div class="icon">🗳️</div>
+        <div class="art">Art. 2–3</div>
+        <h3 data-fr="Démocratique" data-ar="الديمقراطية">Démocratique</h3>
+        <p data-fr="Le pouvoir vient du Peuple. Il s'exerce par des élections libres, directes et transparentes, ou par référendum." data-ar="السلطة مصدرها الشعب. تُمارَس عبر انتخابات حرة ومباشرة وشفافة أو عبر استفتاء شعبي.">Le pouvoir vient du Peuple. Il s'exerce par des élections libres, directes et transparentes, ou par référendum.</p>
+      </div>
+      <div class="principe-card pc-violet">
+        <div class="numero">5</div><div class="icon">⚖️</div>
+        <div class="art">Art. 7</div>
+        <h3 data-fr="État de droit" data-ar="دولة القانون">État de droit</h3>
+        <p data-fr="Tout le monde est égal devant la loi — y compris le Président de la République. La séparation des pouvoirs est garantie." data-ar="الجميع سواء أمام القانون — بما فيهم رئيس الجمهورية. مبدأ الفصل بين السلطات مكفول.">Tout le monde est égal devant la loi — y compris le Président de la République. La séparation des pouvoirs est garantie.</p>
+      </div>
+      <div class="principe-card pc-teal">
+        <div class="numero">6</div><div class="icon">🔒</div>
+        <div class="art">Art. 281</div>
+        <h3 data-fr="Limites intangibles" data-ar="الثوابت غير القابلة للتعديل">Limites intangibles</h3>
+        <p data-fr="Certaines choses ne peuvent jamais être modifiées : la forme républicaine, la laïcité, l'unité nationale et les droits fondamentaux." data-ar="بعض الأمور لا يمكن تعديلها أبدًا: الشكل الجمهوري، العلمانية، الوحدة الوطنية والحقوق الأساسية.">Certaines choses ne peuvent jamais être modifiées : la forme républicaine, la laïcité, l'unité nationale et les droits fondamentaux.</p>
+      </div>
+    </div>
+    <div class="principes-callout fade-in">
+      <strong data-fr="Ancrage constitutionnel" data-ar="الرسوخ الدستوري">Ancrage constitutionnel</strong>
+      <p data-fr="La souveraineté appartient au Peuple tchadien. Vous l'exercez en votant aux élections ou lors d'un référendum. Vos représentants élus doivent rendre des comptes. (Art. 3)" data-ar="السيادة ملك للشعب التشادي. تمارسها بالتصويت في الانتخابات أو الاستفتاء. ممثلوك المنتخبون ملزمون بتقديم الحساب. (المادة 3)">La souveraineté appartient au Peuple tchadien. Vous l'exercez en votant aux élections ou lors d'un référendum. Vos représentants élus doivent rendre des comptes. (Art. 3)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 03 DROITS ===== -->
+<section class="droits-section section" id="droits">
+  <div class="container">
+    <div class="section-tag" style="color:var(--rouge)" data-fr="03 · Titre II · Chapitre I" data-ar="03 · الباب الثاني · الفصل الأول">03 · Titre II · Chapitre I</div>
+    <h2 class="section-title"><span data-fr="Vos Droits " data-ar="حقوقك ">Vos Droits </span><span style="color:var(--rouge)" data-fr="Fondamentaux" data-ar="الأساسية">Fondamentaux</span></h2>
+    <p class="section-intro" data-fr="La Constitution garantit ces droits à chaque citoyen et citoyenne tchadien. L'État a le devoir de les respecter, de les protéger et d'en assurer l'effectivité." data-ar="يكفل الدستور هذه الحقوق لكل مواطن تشادي. تلتزم الدولة باحترامها وحمايتها وضمان تطبيقها الفعلي.">La Constitution garantit ces droits à chaque citoyen et citoyenne tchadien. L'État a le devoir de les respecter, de les protéger et d'en assurer l'effectivité.</p>
+    <div class="droits-grid fade-in">
+      <div class="droit-item cat-judiciaire">
+        <span class="droit-emoji">🛡️</span>
+        <div>
+          <div class="droit-article">Art. 18–19</div>
+          <div class="droit-title" data-fr="Vie & Sécurité" data-ar="الحياة والأمن">Vie & Sécurité</div>
+          <div class="droit-text" data-fr="Votre intégrité physique est protégée. La torture et les traitements dégradants sont strictement interdits." data-ar="سلامتك الجسدية مصونة. التعذيب والمعاملة المهينة محظوران حظرًا صارمًا.">Votre intégrité physique est protégée. La torture et les traitements dégradants sont strictement interdits.</div>
+        </div>
+      </div>
+      <div class="droit-item cat-liberte">
+        <span class="droit-emoji">🗣️</span>
+        <div>
+          <div class="droit-article">Art. 28</div>
+          <div class="droit-title" data-fr="Expression & Presse" data-ar="التعبير والصحافة">Expression & Presse</div>
+          <div class="droit-text" data-fr="Vous avez le droit d'exprimer vos opinions, de créer un journal ou une association, de vous associer librement, dans le respect des lois." data-ar="لك الحق في التعبير عن آرائك وإنشاء صحيفة أو جمعية والانتماء بحرية وفق أحكام القانون.">Vous avez le droit d'exprimer vos opinions, de créer un journal ou une association, de vous associer librement, dans le respect des lois.</div>
+        </div>
+      </div>
+      <div class="droit-item cat-social">
+        <span class="droit-emoji">📚</span>
+        <div>
+          <div class="droit-article">Art. 38</div>
+          <div class="droit-title" data-fr="Instruction & Éducation" data-ar="التعليم والتربية">Instruction & Éducation</div>
+          <div class="droit-text" data-fr="Tout citoyen a droit à l'éducation. L'enseignement public est laïc, gratuit et obligatoire pour tous les enfants tchadiens." data-ar="لكل مواطن الحق في التعليم. التعليم العام علماني ومجاني وإلزامي لجميع الأطفال التشاديين.">Tout citoyen a droit à l'éducation. L'enseignement public est laïc, gratuit et obligatoire pour tous les enfants tchadiens.</div>
+        </div>
+      </div>
+      <div class="droit-item cat-social">
+        <span class="droit-emoji">💼</span>
+        <div>
+          <div class="droit-article">Art. 33–35</div>
+          <div class="droit-title" data-fr="Travail & Emploi" data-ar="العمل والتوظيف">Travail & Emploi</div>
+          <div class="droit-text" data-fr="Droit au travail et à une rémunération équitable, sans discrimination d'origine, de sexe ou d'opinion. L'État garantit ce droit à tous." data-ar="الحق في العمل والأجر العادل دون تمييز بسبب الأصل أو الجنس أو الرأي. تضمن الدولة هذا الحق للجميع.">Droit au travail et à une rémunération équitable, sans discrimination d'origine, de sexe ou d'opinion. L'État garantit ce droit à tous.</div>
+        </div>
+      </div>
+      <div class="droit-item cat-propriete">
+        <span class="droit-emoji">🏠</span>
+        <div>
+          <div class="droit-article">Art. 45–46</div>
+          <div class="droit-title" data-fr="Propriété Privée" data-ar="الملكية الخاصة">Propriété Privée</div>
+          <div class="droit-text" data-fr="Votre propriété est inviolable. L'État ne peut exproprier qu'avec indemnisation préalable, juste et équitable." data-ar="ملكيتك حرمة لا تُنتهك. لا يجوز للدولة نزع الملكية إلا بتعويض مسبق وعادل ومنصف.">Votre propriété est inviolable. L'État ne peut exproprier qu'avec indemnisation préalable, juste et équitable.</div>
+        </div>
+      </div>
+      <div class="droit-item cat-liberte">
+        <span class="droit-emoji">🏃</span>
+        <div>
+          <div class="droit-article">Art. 47–48</div>
+          <div class="droit-title" data-fr="Libre Circulation" data-ar="حرية التنقل">Libre Circulation</div>
+          <div class="droit-text" data-fr="Vous pouvez circuler librement sur le territoire, en sortir et y revenir. Nul ne peut vous l'interdire sans motif légal." data-ar="يحق لك التنقل بحرية داخل البلاد ومغادرتها والعودة إليها. لا يجوز منعك من ذلك دون مسوّغ قانوني.">Vous pouvez circuler librement sur le territoire, en sortir et y revenir. Nul ne peut vous l'interdire sans motif légal.</div>
+        </div>
+      </div>
+      <div class="droit-item cat-judiciaire">
+        <span class="droit-emoji">⚖️</span>
+        <div>
+          <div class="droit-article">Art. 25</div>
+          <div class="droit-title" data-fr="Présomption d'innocence" data-ar="قرينة البراءة">Présomption d'innocence</div>
+          <div class="droit-text" data-fr="Tout accusé est présumé innocent jusqu'à ce qu'un tribunal prouve sa culpabilité lors d'un procès équitable offrant toutes les garanties de défense." data-ar="كل متهم بريء حتى تثبت إدانته بمحاكمة عادلة توفر جميع ضمانات الدفاع.">Tout accusé est présumé innocent jusqu'à ce qu'un tribunal prouve sa culpabilité lors d'un procès équitable offrant toutes les garanties de défense.</div>
+        </div>
+      </div>
+      <div class="droit-item cat-social">
+        <span class="droit-emoji">🌿</span>
+        <div>
+          <div class="droit-article">Art. 51</div>
+          <div class="droit-title" data-fr="Environnement sain" data-ar="البيئة السليمة">Environnement sain</div>
+          <div class="droit-text" data-fr="Toute personne a le droit de vivre dans un environnement sain. Les déchets toxiques étrangers sont interdits sur le territoire tchadien." data-ar="لكل شخص الحق في العيش في بيئة سليمة. يُحظر إدخال النفايات السامة الأجنبية إلى الأراضي التشادية.">Toute personne a le droit de vivre dans un environnement sain. Les déchets toxiques étrangers sont interdits sur le territoire tchadien.</div>
+        </div>
+      </div>
+      <div class="droit-item cat-femmes">
+        <span class="droit-emoji">♀️</span>
+        <div>
+          <div class="droit-article">Art. 15, 34</div>
+          <div class="droit-title" data-fr="Droits des femmes" data-ar="حقوق المرأة">Droits des femmes</div>
+          <div class="droit-text" data-fr="L'État garantit l'égalité entre les femmes et les hommes dans tous les domaines, y compris l'accès aux emplois publics et aux assemblées élues." data-ar="تضمن الدولة المساواة بين المرأة والرجل في جميع المجالات بما فيها الوصول للوظائف العامة والمجالس المنتخبة.">L'État garantit l'égalité entre les femmes et les hommes dans tous les domaines, y compris l'accès aux emplois publics et aux assemblées élues.</div>
+        </div>
+      </div>
+    </div>
+    <div class="droits-callout fade-in">
+      <strong data-fr="Principe d'égalité (Art. 14 & 15)" data-ar="مبدأ المساواة (المواد 14 و15)">Principe d'égalité (Art. 14 & 15)</strong>
+      <p data-fr="Les Tchadiens des deux sexes ont les mêmes droits et les mêmes devoirs. Ils sont égaux devant la loi, sans discrimination d'origine, de race, de sexe, de religion ou d'opinion politique." data-ar="للتشاديين والتشاديات الحقوق والواجبات ذاتها. هم متساوون أمام القانون دون تمييز بسبب الأصل أو العرق أو الجنس أو الدين أو الرأي السياسي.">Les Tchadiens des deux sexes ont les mêmes droits et les mêmes devoirs. Ils sont égaux devant la loi, sans discrimination d'origine, de race, de sexe, de religion ou d'opinion politique.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 04 POUVOIRS ===== -->
+<section class="pouvoirs-section" id="pouvoirs">
+  <div class="container">
+    <div class="section-tag" style="color:var(--or)" data-fr="04 · Titres III – VI" data-ar="04 · الأبواب III – VI">04 · Titres III – VI</div>
+    <h2 class="section-title" style="color:white;margin-bottom:16px"><span data-fr="La Séparation des " data-ar="الفصل بين ">La Séparation des </span><em style="color:var(--or);font-style:normal" data-fr="Pouvoirs" data-ar="السلطات">Pouvoirs</em></h2>
+    <p class="section-intro" style="color:rgba(255,255,255,.45);margin-bottom:40px" data-fr="La Constitution organise la séparation des pouvoirs entre trois branches indépendantes. Chacune a son rôle et ses limites, et surveille les deux autres — c'est le principe des contre-pouvoirs. Aucune ne peut dominer seule." data-ar="ينظّم الدستور الفصل بين السلطات على ثلاثة فروع مستقلة. لكل منها دورها وحدودها، وتراقب بعضها البعض — وهذا هو مبدأ التوازن. لا يمكن لأي منها أن تهيمن وحدها.">La Constitution organise la séparation des pouvoirs entre trois branches indépendantes. Chacune a son rôle et ses limites, et surveille les deux autres — c'est le principe des contre-pouvoirs. Aucune ne peut dominer seule.</p>
+    <div class="pouvoirs-table fade-in">
+      <div class="pv-col">
+        <div class="pv-header">
+          <div class="pv-icon">⚡</div>
+          <div class="pv-title" data-fr="Exécutif" data-ar="السلطة التنفيذية">Exécutif</div>
+          <div class="pv-tagline" data-fr="Il gouverne et applique les lois" data-ar="تحكم وتُطبِّق القوانين">Il gouverne et applique les lois</div>
+        </div>
+        <div class="pv-institution">
+          <div class="pv-inst-name" data-fr="Président de la République" data-ar="رئيس الجمهورية">Président de la République</div>
+          <div class="pv-inst-text" data-fr="Élu au suffrage universel direct pour 7 ans. Chef de l'État, garant de la Constitution, dirige l'armée et représente le Tchad. (Art. 65–97)" data-ar="يُنتخب بالاقتراع العام المباشر لمدة 7 سنوات. رئيس الدولة وحارس الدستور، يقود الجيش ويمثل تشاد. (المواد 65–97)">Élu au suffrage universel direct pour 7 ans. Chef de l'État, garant de la Constitution, dirige l'armée et représente le Tchad. (Art. 65–97)</div>
+        </div>
+        <div class="pv-institution">
+          <div class="pv-inst-name" data-fr="Gouvernement" data-ar="الحكومة">Gouvernement</div>
+          <div class="pv-inst-text" data-fr="Premier Ministre et Ministres. Applique la politique de la nation. Responsable devant l'Assemblée nationale. (Art. 99–109)" data-ar="رئيس الوزراء والوزراء. تنفذ السياسة الوطنية. مسؤولة أمام الجمعية الوطنية. (المواد 99–109)">Premier Ministre et Ministres. Applique la politique de la nation. Responsable devant l'Assemblée nationale. (Art. 99–109)</div>
+        </div>
+      </div>
+      <div class="pv-col">
+        <div class="pv-header">
+          <div class="pv-icon">📜</div>
+          <div class="pv-title" data-fr="Législatif" data-ar="السلطة التشريعية">Législatif</div>
+          <div class="pv-tagline" data-fr="Il vote les lois et contrôle le gouvernement" data-ar="يُشرِّع القوانين ويراقب الحكومة">Il vote les lois et contrôle le gouvernement</div>
+        </div>
+        <div class="pv-institution">
+          <div class="pv-inst-name" data-fr="Assemblée Nationale" data-ar="الجمعية الوطنية">Assemblée Nationale</div>
+          <div class="pv-inst-text" data-fr="Députés élus au suffrage direct pour 6 ans. Vote les lois, le budget, peut renverser le gouvernement. (Art. 110–131)" data-ar="نواب مُنتخبون بالاقتراع المباشر لمدة 6 سنوات. يصوتون على القوانين والميزانية، ويمكنهم إسقاط الحكومة. (المواد 110–131)">Députés élus au suffrage direct pour 6 ans. Vote les lois, le budget, peut renverser le gouvernement. (Art. 110–131)</div>
+        </div>
+        <div class="pv-institution">
+          <div class="pv-inst-name" data-fr="Sénat" data-ar="مجلس الشيوخ">Sénat</div>
+          <div class="pv-inst-text" data-fr="2/3 élus indirectement + 1/3 nommés. Représente les Collectivités. Mandat de 6 ans. (Art. 114–120)" data-ar="ثلثان منتخبون بشكل غير مباشر + ثلث معيّنون. يمثل الجماعات المحلية. ولاية 6 سنوات. (المواد 114–120)">2/3 élus indirectement + 1/3 nommés. Représente les Collectivités. Mandat de 6 ans. (Art. 114–120)</div>
+        </div>
+      </div>
+      <div class="pv-col">
+        <div class="pv-header">
+          <div class="pv-icon">⚖️</div>
+          <div class="pv-title" data-fr="Judiciaire" data-ar="السلطة القضائية">Judiciaire</div>
+          <div class="pv-tagline" data-fr="Il rend la justice et protège vos droits" data-ar="تُقيم العدل وتحمي حقوقك">Il rend la justice et protège vos droits</div>
+        </div>
+        <div class="pv-institution">
+          <div class="pv-inst-name" data-fr="Cour Suprême" data-ar="المحكمة العليا">Cour Suprême</div>
+          <div class="pv-inst-text" data-fr="Plus haute juridiction judiciaire et administrative. 41 membres pour 7 ans. (Art. 165–169)" data-ar="أعلى هيئة قضائية وإدارية. 41 عضوًا لمدة 7 سنوات. (المواد 165–169)">Plus haute juridiction judiciaire et administrative. 41 membres pour 7 ans. (Art. 165–169)</div>
+        </div>
+        <div class="pv-institution">
+          <div class="pv-inst-name" data-fr="Autres juridictions" data-ar="المحاكم الأخرى">Autres juridictions</div>
+          <div class="pv-inst-text" data-fr="Tribunaux de première instance, cours d'appel, tribunal militaire. Magistrats inamovibles et indépendants. (Art. 160–164)" data-ar="محاكم الدرجة الأولى، محاكم الاستئناف، المحكمة العسكرية. قضاة غير قابلين للعزل ومستقلون. (المواد 160–164)">Tribunaux de première instance, cours d'appel, tribunal militaire. Magistrats inamovibles et indépendants. (Art. 160–164)</div>
+        </div>
+      </div>
+    </div>
+    <div class="pouvoirs-callout fade-in">
+      <strong data-fr="Le Principe (Art. 7)" data-ar="المبدأ (المادة 7)">Le Principe (Art. 7)</strong>
+      <p data-fr="Pour éviter les abus, chaque pouvoir surveille les autres. Le Parlement contrôle le Gouvernement. Le Conseil Constitutionnel contrôle les lois. Les tribunaux protègent vos droits contre l'État lui-même." data-ar="لتفادي الإساءة، تراقب كل سلطة الأخريات. يراقب البرلمان الحكومة. يراقب المجلس الدستوري القوانين. تحمي المحاكم حقوقك في مواجهة الدولة نفسها.">Pour éviter les abus, chaque pouvoir surveille les autres. Le Parlement contrôle le Gouvernement. Le Conseil Constitutionnel contrôle les lois. Les tribunaux protègent vos droits contre l'État lui-même.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 05 CONSEIL CONSTITUTIONNEL ===== -->
+<section class="cc-section" id="conseil">
+  <div class="container">
+    <div class="section-tag" style="color:var(--or)" data-fr="05 · Titre VII · Art. 173–183" data-ar="05 · الباب السابع · المواد 173–183">05 · Titre VII · Art. 173–183</div>
+    <h2 class="section-title" style="color:white;margin-bottom:16px"><span data-fr="Le Conseil " data-ar="المجلس ">Le Conseil </span><em style="color:var(--or);font-style:normal" data-fr="Constitutionnel" data-ar="الدستوري">Constitutionnel</em></h2>
+    <p class="section-intro" style="color:rgba(255,255,255,.45);margin-bottom:40px" data-fr="C'est le gardien de la Constitution — l'arbitre des règles du jeu. Sa mission : s'assurer que toutes les lois, élections et décisions des pouvoirs publics respectent la Loi Suprême. Ses décisions s'imposent à tous, sans exception." data-ar="هو حارس الدستور وحَكَم قواعد اللعبة. مهمته: التأكد من أن جميع القوانين والانتخابات وقرارات السلطات العامة تحترم القانون الأسمى. قراراته ملزمة للجميع دون استثناء.">C'est le gardien de la Constitution — l'arbitre des règles du jeu. Sa mission : s'assurer que toutes les lois, élections et décisions des pouvoirs publics respectent la Loi Suprême. Ses décisions s'imposent à tous, sans exception.</p>
+    <div class="cc-stats-row fade-in">
+      <div class="cc-stat"><div class="big">9</div><div class="label" data-fr="Membres (3 magistrats + 6 juristes)" data-ar="أعضاء (3 قضاة + 6 فقهاء)">Membres<br>(3 magistrats + 6 juristes)</div></div>
+      <div class="cc-stat"><div class="big">9 ans</div><div class="label" data-fr="Mandat non renouvelable" data-ar="ولاية غير قابلة للتجديد">Mandat non renouvelable</div></div>
+      <div class="cc-stat"><div class="big">45 j</div><div class="label" data-fr="Délai max pour statuer" data-ar="أقصى مهلة للبتّ">Délai max pour statuer</div></div>
+      <div class="cc-stat"><div class="big">3 ans</div><div class="label" data-fr="Mandat du Président (renouvelable)" data-ar="ولاية الرئيس (قابلة للتجديد)">Mandat du Président<br>(renouvelable)</div></div>
+    </div>
+    <div class="cc-grid fade-in">
+      <div class="cc-mission">
+        <div class="cc-num">01</div>
+        <div class="cc-mission-title" data-fr="Contrôle des Lois" data-ar="الرقابة على القوانين">Contrôle des Lois</div>
+        <div class="cc-mission-art">Art. 174 & 179</div>
+        <div class="cc-mission-text" data-fr="Avant promulgation, le Conseil vérifie que toute loi respecte la Constitution. Une loi inconstitutionnelle ne peut s'appliquer." data-ar="قبل الإصدار، يتحقق المجلس من أن كل قانون يحترم الدستور. القانون غير الدستوري لا يُطبَّق.">Avant promulgation, le Conseil vérifie que toute loi respecte la Constitution. Une loi inconstitutionnelle ne peut s'appliquer.</div>
+      </div>
+      <div class="cc-mission">
+        <div class="cc-num">02</div>
+        <div class="cc-mission-title" data-fr="Surveillance des Élections" data-ar="الإشراف على الانتخابات">Surveillance des Élections</div>
+        <div class="cc-mission-art">Art. 69, 74</div>
+        <div class="cc-mission-text" data-fr="Surveille les élections présidentielles, législatives et sénatoriales. Proclame les résultats officiels et tranche les litiges électoraux." data-ar="يشرف على الانتخابات الرئاسية والتشريعية والشيوخية. يُعلن النتائج الرسمية ويفصل في النزاعات الانتخابية.">Surveille les élections présidentielles, législatives et sénatoriales. Proclame les résultats officiels et tranche les litiges électoraux.</div>
+      </div>
+      <div class="cc-mission">
+        <div class="cc-num">03</div>
+        <div class="cc-mission-title" data-fr="Référendum" data-ar="الاستفتاء">Référendum</div>
+        <div class="cc-mission-art">Art. 174</div>
+        <div class="cc-mission-text" data-fr="Veille à la régularité du vote direct du peuple sur toute question majeure et proclame ses résultats officiels." data-ar="يضمن انتظام التصويت المباشر للشعب على أي مسألة كبرى ويُعلن نتائجه الرسمية.">Veille à la régularité du vote direct du peuple sur toute question majeure et proclame ses résultats officiels.</div>
+      </div>
+      <div class="cc-mission">
+        <div class="cc-num">04</div>
+        <div class="cc-mission-title" data-fr="Prestation de Serment" data-ar="أداء اليمين">Prestation de Serment</div>
+        <div class="cc-mission-art">Art. 76</div>
+        <div class="cc-mission-text" data-fr="Le Président de la République prête serment devant le Conseil pour prendre officiellement ses fonctions de Chef de l'État." data-ar="يؤدي رئيس الجمهورية اليمين أمام المجلس لتولي مهام رئيس الدولة رسميًا.">Le Président de la République prête serment devant le Conseil pour prendre officiellement ses fonctions de Chef de l'État.</div>
+      </div>
+      <div class="cc-mission">
+        <div class="cc-num">05</div>
+        <div class="cc-mission-title" data-fr="Régulation des Institutions" data-ar="تنظيم المؤسسات">Régulation des Institutions</div>
+        <div class="cc-mission-art">Art. 174, 179</div>
+        <div class="cc-mission-text" data-fr="Règle les conflits entre les pouvoirs de l'État pour assurer le bon fonctionnement institutionnel de la République." data-ar="يفصل في النزاعات بين سلطات الدولة لضمان حسن سير المؤسسات الجمهورية.">Règle les conflits entre les pouvoirs de l'État pour assurer le bon fonctionnement institutionnel de la République.</div>
+      </div>
+      <div class="cc-mission">
+        <div class="cc-num">06</div>
+        <div class="cc-mission-title" data-fr="Protection du Citoyen" data-ar="حماية المواطن">Protection du Citoyen</div>
+        <div class="cc-mission-art">Art. 180</div>
+        <div class="cc-mission-text" data-fr="Tout Tchadien peut invoquer l'inconstitutionnalité d'une loi lors d'un procès. La juridiction suspend et saisit le Conseil. Délai : 45 jours." data-ar="لكل تشادي إثارة عدم دستورية قانون أثناء المحاكمة. تُعلّق الجهة القضائية النظر وتُحيل الأمر للمجلس. المهلة: 45 يومًا.">Tout Tchadien peut invoquer l'inconstitutionnalité d'une loi lors d'un procès. La juridiction suspend et saisit le Conseil. Délai : 45 jours.</div>
+      </div>
+    </div>
+    <div class="cc-saisir fade-in">
+      <h3 data-fr="Qui peut saisir le Conseil Constitutionnel ?" data-ar="من يحق له إحالة القضايا إلى المجلس الدستوري؟">Qui peut saisir le Conseil Constitutionnel ?</h3>
+      <div class="cc-saisir-list">
+        <div class="cc-saisir-item"><span class="cc-saisir-icon">🏛️</span><div class="cc-saisir-text"><strong data-fr="Le Président de la République (Art. 179)" data-ar="رئيس الجمهورية (المادة 179)">Le Président de la République (Art. 179)</strong> <span data-fr="— Peut saisir le Conseil sur la constitutionnalité d'une loi avant de la promulguer." data-ar="— يمكنه إحالة المجلس بشأن دستورية قانون قبل إصداره.">— Peut saisir le Conseil sur la constitutionnalité d'une loi avant de la promulguer.</span></div></div>
+        <div class="cc-saisir-item"><span class="cc-saisir-icon">👔</span><div class="cc-saisir-text"><strong data-fr="Le Premier Ministre (Art. 179)" data-ar="رئيس الوزراء (المادة 179)">Le Premier Ministre (Art. 179)</strong> <span data-fr="— Pour résoudre un conflit d'attributions entre les pouvoirs." data-ar="— لحسم نزاع الاختصاصات بين السلطات.">— Pour résoudre un conflit d'attributions entre les pouvoirs.</span></div></div>
+        <div class="cc-saisir-item"><span class="cc-saisir-icon">📋</span><div class="cc-saisir-text"><strong data-fr="Les Présidents des Assemblées (Art. 179)" data-ar="رؤساء المجالس (المادة 179)">Les Présidents des Assemblées (Art. 179)</strong> <span data-fr="— Le Président de l'Assemblée nationale ou du Sénat." data-ar="— رئيس الجمعية الوطنية أو رئيس مجلس الشيوخ.">— Le Président de l'Assemblée nationale ou du Sénat.</span></div></div>
+        <div class="cc-saisir-item"><span class="cc-saisir-icon">👥</span><div class="cc-saisir-text"><strong data-fr="1/10 des parlementaires (Art. 179)" data-ar="عُشر البرلمانيين (المادة 179)">1/10 des parlementaires (Art. 179)</strong> <span data-fr="— Un groupe d'au moins 1/10 des membres de l'Assemblée nationale ou du Sénat." data-ar="— مجموعة تضم ما لا يقل عن عُشر أعضاء الجمعية الوطنية أو مجلس الشيوخ.">— Un groupe d'au moins 1/10 des membres de l'Assemblée nationale ou du Sénat.</span></div></div>
+        <div class="cc-saisir-item"><span class="cc-saisir-icon">🧑‍🤝‍🧑</span><div class="cc-saisir-text"><strong data-fr="Tout citoyen — exception d'inconstitutionnalité (Art. 180)" data-ar="كل مواطن — الدفع بعدم الدستورية (المادة 180)">Tout citoyen — exception d'inconstitutionnalité (Art. 180)</strong> <span data-fr="— Dans le cadre d'un procès, tout Tchadien peut contester une loi inconstitutionnelle." data-ar="— في إطار محاكمة، يمكن لأي تشادي الطعن في قانون غير دستوري.">— Dans le cadre d'un procès, tout Tchadien peut contester une loi inconstitutionnelle.</span></div></div>
+      </div>
+    </div>
+    <div class="cc-callout fade-in">
+      <strong data-fr="Décisions sans recours (Art. 181–182)" data-ar="قرارات غير قابلة للطعن (المواد 181–182)">Décisions sans recours (Art. 181–182)</strong>
+      <p data-fr="Les décisions du Conseil Constitutionnel ne peuvent faire l'objet d'aucun recours. Elles s'imposent aux pouvoirs publics, à l'armée et à tous les tribunaux. Même le Président de la République doit s'y soumettre." data-ar="قرارات المجلس الدستوري غير قابلة للطعن. تُلزم السلطات العامة والجيش وجميع المحاكم. حتى رئيس الجمهورية ملزم بالامتثال لها.">Les décisions du Conseil Constitutionnel ne peuvent faire l'objet d'aucun recours. Elles s'imposent aux pouvoirs publics, à l'armée et à tous les tribunaux. Même le Président de la République doit s'y soumettre.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 06 ÉLECTION ===== -->
+<section class="electoral-section" id="election">
+  <div class="container">
+    <div class="section-tag" style="color:var(--bleu)" data-fr="06 · Art. 67–76" data-ar="06 · المواد 67–76">06 · Art. 67–76</div>
+    <h2 class="section-title"><span data-fr="L'Élection " data-ar="الانتخابات ">L'Élection </span><span class="text-bleu" data-fr="Présidentielle" data-ar="الرئاسية">Présidentielle</span></h2>
+    <p class="section-intro" data-fr="Les étapes constitutionnelles que doit traverser toute élection présidentielle au Tchad. La HAMA garantit l'égal accès aux médias ; l'ANGE organise la logistique." data-ar="المراحل الدستورية التي يجب أن تمر بها أي انتخابات رئاسية في تشاد. تضمن الـ HAMA المساواة في الوصول إلى الإعلام؛ وتتولى الـ ANGE الجانب اللوجستي.">Les étapes constitutionnelles que doit traverser toute élection présidentielle au Tchad. La HAMA garantit l'égal accès aux médias ; l'ANGE organise la logistique.</p>
+    <div class="timeline fade-in">
+      <div class="tl-step">
+        <div class="tl-dot">01</div>
+        <div class="tl-card">
+          <div class="tl-title" data-fr="Dépôt des Candidatures" data-ar="تقديم الترشحات">Dépôt des Candidatures</div>
+          <ul class="tl-list">
+            <li><span data-fr="Entre 50 et 60 jours avant le scrutin, auprès du Conseil Constitutionnel." data-ar="بين 50 و60 يومًا قبل الاقتراع، تُودَع لدى المجلس الدستوري.">Entre 50 et 60 jours avant le scrutin, auprès du Conseil Constitutionnel.</span></li>
+            <li><span data-fr="Conditions : être Tchadien(ne) de naissance · 35 ans minimum · Résider au Tchad · Jouir de ses droits civiques." data-ar="الشروط: تشادي الجنسية منذ الولادة · 35 سنة كحد أدنى · الإقامة في تشاد · التمتع بالحقوق المدنية.">Conditions : être Tchadien(ne) de naissance · 35 ans minimum · Résider au Tchad · Jouir de ses droits civiques.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">02</div>
+        <div class="tl-card">
+          <div class="tl-title" data-fr="Campagne Électorale" data-ar="الحملة الانتخابية">Campagne Électorale</div>
+          <ul class="tl-list">
+            <li><span data-fr="La HAMA garantit l'égal accès de tous les candidats aux médias publics." data-ar="تضمن الـ HAMA المساواة في وصول جميع المرشحين إلى الإعلام العمومي.">La HAMA garantit l'égal accès de tous les candidats aux médias publics.</span></li>
+            <li><span data-fr="Durée fixée par la loi électorale · Égalité de temps de parole · L'ANGE organise la logistique." data-ar="مدتها محددة بقانون الانتخابات · تساوي وقت الكلام · الـ ANGE تتولى اللوجستيك.">Durée fixée par la loi électorale · Égalité de temps de parole · L'ANGE organise la logistique.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">03</div>
+        <div class="tl-card">
+          <div class="tl-title" data-fr="1er Tour" data-ar="الدورة الأولى">1er Tour</div>
+          <ul class="tl-list">
+            <li><span data-fr="Tous les candidats se présentent." data-ar="يتقدم جميع المرشحين.">Tous les candidats se présentent.</span></li>
+            <li><span data-fr="Si un candidat obtient la majorité absolue des suffrages exprimés : il est élu directement." data-ar="إذا حصل مرشح على الأغلبية المطلقة للأصوات المُعبَّر عنها فإنه يُنتخب مباشرة.">Si un candidat obtient la majorité absolue des suffrages exprimés : il est élu directement.</span></li>
+            <li><span data-fr="Sinon, passage au 2ème tour des 2 candidats arrivés en tête." data-ar="وإلا، يُجري الدورة الثانية المرشحان المتصدران.">Sinon, passage au 2ème tour des 2 candidats arrivés en tête.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">04</div>
+        <div class="tl-card">
+          <div class="tl-title" data-fr="2ème Tour (si nécessaire)" data-ar="الدورة الثانية (إن لزم)">2ème Tour (si nécessaire)</div>
+          <ul class="tl-list">
+            <li><span data-fr="Les 2 candidats arrivés en tête au 1er tour s'affrontent." data-ar="يتواجه المرشحان المتقدمان في الدورة الأولى.">Les 2 candidats arrivés en tête au 1er tour s'affrontent.</span></li>
+            <li><span data-fr="Organisé dans les 30 jours suivant le 1er tour." data-ar="تُنظَّم في غضون 30 يومًا من الدورة الأولى.">Organisé dans les 30 jours suivant le 1er tour.</span></li>
+            <li><span data-fr="Élu : celui qui obtient le plus grand nombre de votes." data-ar="الفائز: من يحصل على أكبر عدد من الأصوات.">Élu : celui qui obtient le plus grand nombre de votes.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">05</div>
+        <div class="tl-card">
+          <div class="tl-title" data-fr="Proclamation des Résultats" data-ar="الإعلان عن النتائج">Proclamation des Résultats</div>
+          <ul class="tl-list">
+            <li><span data-fr="Le Conseil Constitutionnel proclame les résultats définitifs et valide l'élection." data-ar="يُعلن المجلس الدستوري النتائج النهائية ويُصادق على الانتخابات.">Le Conseil Constitutionnel proclame les résultats définitifs et valide l'élection.</span></li>
+            <li><span data-fr="Décision souveraine et sans appel · Publication au Journal Officiel." data-ar="قرار سيادي لا يقبل الطعن · يُنشر في الجريدة الرسمية.">Décision souveraine et sans appel · Publication au Journal Officiel.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">06</div>
+        <div class="tl-card">
+          <div class="tl-title" data-fr="Prestation de Serment" data-ar="أداء اليمين">Prestation de Serment</div>
+          <ul class="tl-list">
+            <li><span data-fr="Le Président élu prête serment devant le Conseil Constitutionnel en présence du Parlement." data-ar="يؤدي الرئيس المنتخب اليمين أمام المجلس الدستوري بحضور البرلمان.">Le Président élu prête serment devant le Conseil Constitutionnel en présence du Parlement.</span></li>
+            <li><span data-fr="Prend officiellement ses fonctions · Mandat de 7 ans renouvelable une seule fois." data-ar="يتولى مهامه رسميًا · ولاية 7 سنوات قابلة للتجديد مرة واحدة فقط.">Prend officiellement ses fonctions · Mandat de 7 ans renouvelable une seule fois.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 07 DEVOIRS ===== -->
+<section class="devoirs-section" id="devoirs">
+  <div class="container">
+    <div class="section-tag" style="color:var(--bleu)" data-fr="07 · Titre II · Chapitre II" data-ar="07 · الباب الثاني · الفصل الثاني">07 · Titre II · Chapitre II</div>
+    <h2 class="section-title"><span data-fr="Vos Devoirs de " data-ar="واجباتك بوصفك ">Vos Devoirs de </span><span class="text-bleu" data-fr="Citoyen" data-ar="مواطنًا">Citoyen</span></h2>
+    <p class="section-intro" data-fr="Les droits et les devoirs sont les deux faces d'une même médaille. Voici ce que la Constitution demande à chaque citoyenne et citoyen tchadien en contrepartie des droits qu'elle garantit." data-ar="الحقوق والواجبات وجهان لعملة واحدة. إليك ما يطلبه الدستور من كل مواطن تشادي في مقابل الحقوق التي يكفلها.">Les droits et les devoirs sont les deux faces d'une même médaille. Voici ce que la Constitution demande à chaque citoyenne et citoyen tchadien en contrepartie des droits qu'elle garantit.</p>
+    <div class="devoirs-grid fade-in">
+      <div class="devoir-card"><div class="devoir-icon">📜</div><div class="devoir-art">Art. 52</div><div class="devoir-title" data-fr="Respecter la Constitution" data-ar="احترام الدستور">Respecter la Constitution</div><div class="devoir-text" data-fr="Tout citoyen doit respecter la Constitution, les lois, les règlements et les institutions de la République." data-ar="على كل مواطن احترام الدستور والقوانين واللوائح ومؤسسات الجمهورية.">Tout citoyen doit respecter la Constitution, les lois, les règlements et les institutions de la République.</div></div>
+      <div class="devoir-card"><div class="devoir-icon">🏛️</div><div class="devoir-art">Art. 53</div><div class="devoir-title" data-fr="Respecter les Biens Publics" data-ar="احترام الممتلكات العامة">Respecter les Biens Publics</div><div class="devoir-text" data-fr="Routes, hôpitaux, écoles… sont des biens collectifs inviolables que chacun doit respecter et protéger." data-ar="الطرق والمستشفيات والمدارس... ممتلكات جماعية لا تُمسّ يجب على الجميع احترامها وحمايتها.">Routes, hôpitaux, écoles… sont des biens collectifs inviolables que chacun doit respecter et protéger.</div></div>
+      <div class="devoir-card"><div class="devoir-icon">🎖️</div><div class="devoir-art">Art. 55</div><div class="devoir-title" data-fr="Défendre la Patrie" data-ar="الدفاع عن الوطن">Défendre la Patrie</div><div class="devoir-text" data-fr="La défense de la patrie est un devoir pour tout Tchadien. Le service militaire est obligatoire selon les conditions fixées par la loi." data-ar="الدفاع عن الوطن واجب على كل تشادي. الخدمة العسكرية إلزامية وفق الشروط التي يحددها القانون.">La défense de la patrie est un devoir pour tout Tchadien. Le service militaire est obligatoire selon les conditions fixées par la loi.</div></div>
+      <div class="devoir-card"><div class="devoir-icon">💰</div><div class="devoir-art">Art. 58</div><div class="devoir-title" data-fr="Payer ses Impôts" data-ar="دفع الضرائب">Payer ses Impôts</div><div class="devoir-text" data-fr="Chaque citoyen contribue aux charges publiques selon ses moyens. Les impôts financent les services publics pour tous." data-ar="يساهم كل مواطن في الأعباء العامة بحسب إمكانياته. الضرائب تمول الخدمات العامة للجميع.">Chaque citoyen contribue aux charges publiques selon ses moyens. Les impôts financent les services publics pour tous.</div></div>
+      <div class="devoir-card"><div class="devoir-icon">🌱</div><div class="devoir-art">Art. 57</div><div class="devoir-title" data-fr="Protéger l'Environnement" data-ar="حماية البيئة">Protéger l'Environnement</div><div class="devoir-text" data-fr="La protection de l'environnement est un devoir civique. Chacun doit contribuer à préserver les ressources naturelles du pays." data-ar="حماية البيئة واجب مدني. على الجميع المساهمة في صون الموارد الطبيعية للبلاد.">La protection de l'environnement est un devoir civique. Chacun doit contribuer à préserver les ressources naturelles du pays.</div></div>
+      <div class="devoir-card"><div class="devoir-icon">🤝</div><div class="devoir-art">Art. 28</div><div class="devoir-title" data-fr="Respecter les Droits d'Autrui" data-ar="احترام حقوق الآخرين">Respecter les Droits d'Autrui</div><div class="devoir-text" data-fr="Vos libertés s'exercent dans le respect de celles des autres, de l'ordre public et des bonnes mœurs." data-ar="تُمارَس حرياتك في إطار احترام حريات الآخرين والنظام العام والأخلاق الحميدة.">Vos libertés s'exercent dans le respect de celles des autres, de l'ordre public et des bonnes mœurs.</div></div>
+      <div class="devoir-card"><div class="devoir-icon">🗳️</div><div class="devoir-art">Art. 6</div><div class="devoir-title" data-fr="Participer à la Vie Civique" data-ar="المشاركة في الحياة المدنية">Participer à la Vie Civique</div><div class="devoir-text" data-fr="Le vote est à la fois un droit et un devoir civique. La participation citoyenne est le fondement de la démocratie." data-ar="التصويت حق وواجب مدني في آنٍ واحد. المشاركة المواطنية أساس الديمقراطية.">Le vote est à la fois un droit et un devoir civique. La participation citoyenne est le fondement de la démocratie.</div></div>
+      <div class="devoir-card"><div class="devoir-icon">🔨</div><div class="devoir-art">Art. 52</div><div class="devoir-title" data-fr="Contribuer au Développement" data-ar="المساهمة في التنمية">Contribuer au Développement</div><div class="devoir-text" data-fr="Chaque citoyen contribue, selon ses capacités, au développement économique, social et culturel de la nation." data-ar="يساهم كل مواطن بحسب قدراته في التنمية الاقتصادية والاجتماعية والثقافية للأمة.">Chaque citoyen contribue, selon ses capacités, au développement économique, social et culturel de la nation.</div></div>
+    </div>
+    <div class="devoirs-callout fade-in">
+      <strong data-fr="Droits et devoirs : les deux faces d'une même médaille" data-ar="الحقوق والواجبات: وجهان لعملة واحدة">Droits et devoirs : les deux faces d'une même médaille</strong>
+      <p data-fr="Une société fonctionne bien quand chacun respecte ses obligations envers la collectivité. Les droits garantissent votre liberté ; les devoirs garantissent celle de tous." data-ar="يسير المجتمع بشكل جيد عندما يحترم كل فرد واجباته تجاه الجماعة. الحقوق تضمن حريتك؛ والواجبات تضمن حرية الجميع.">Une société fonctionne bien quand chacun respecte ses obligations envers la collectivité. Les droits garantissent votre liberté ; les devoirs garantissent celle de tous.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 08 INSTITUTIONS ===== -->
+<section class="institutions-section" id="institutions">
+  <div class="container">
+    <div class="section-tag" style="color:var(--teal)" data-fr="08 · Titres III – X" data-ar="08 · الأبواب III – X">08 · Titres III – X</div>
+    <h2 class="section-title"><span data-fr="Les Institutions " data-ar="مؤسسات ">Les Institutions </span><span style="color:var(--teal)" data-fr="du Tchad" data-ar="تشاد">du Tchad</span></h2>
+    <p class="section-intro" data-fr="Panorama complet des institutions constitutionnelles — qui gouverne, qui veille, qui protège. Toutes trouvent leur légitimité dans la souveraineté du Peuple tchadien." data-ar="استعراض شامل للمؤسسات الدستورية — من يحكم، من يسهر، من يحمي. كلها تستمد شرعيتها من سيادة الشعب التشادي.">Panorama complet des institutions constitutionnelles — qui gouverne, qui veille, qui protège. Toutes trouvent leur légitimité dans la souveraineté du Peuple tchadien.</p>
+    <div class="inst-grid fade-in">
+      <div class="inst-card ic-exec"><div class="inst-icon">🏛️</div><div class="inst-name" data-fr="Présidence de la République" data-ar="رئاسة الجمهورية">Présidence de la République</div><div class="inst-art">Art. 65–97</div><div class="inst-text" data-fr="Chef de l'État, garant de la Constitution et de l'unité nationale. Élu au suffrage universel direct pour 7 ans (renouvelable une fois)." data-ar="رئيس الدولة وحارس الدستور والوحدة الوطنية. يُنتخب بالاقتراع العام المباشر لمدة 7 سنوات (قابلة للتجديد مرة واحدة).">Chef de l'État, garant de la Constitution et de l'unité nationale. Élu au suffrage universel direct pour 7 ans (renouvelable une fois).</div><div class="inst-badge" data-fr="Exécutif" data-ar="تنفيذي">Exécutif</div></div>
+      <div class="inst-card ic-exec"><div class="inst-icon">👔</div><div class="inst-name" data-fr="Gouvernement" data-ar="الحكومة">Gouvernement</div><div class="inst-art">Art. 99–109</div><div class="inst-text" data-fr="Premier Ministre et Ministres. Applique la politique de la nation. Responsable devant l'Assemblée nationale." data-ar="رئيس الوزراء والوزراء. تنفذ السياسة الوطنية. مسؤولة أمام الجمعية الوطنية.">Premier Ministre et Ministres. Applique la politique de la nation. Responsable devant l'Assemblée nationale.</div><div class="inst-badge" data-fr="Exécutif" data-ar="تنفيذي">Exécutif</div></div>
+      <div class="inst-card ic-legis"><div class="inst-icon">📋</div><div class="inst-name" data-fr="Assemblée Nationale" data-ar="الجمعية الوطنية">Assemblée Nationale</div><div class="inst-art">Art. 110–131</div><div class="inst-text" data-fr="Vote les lois, le budget, contrôle le gouvernement, peut voter une motion de censure. Députés élus au suffrage universel direct pour 6 ans." data-ar="تصوّت على القوانين والميزانية، تراقب الحكومة ويمكنها سحب الثقة منها. نواب مُنتخبون بالاقتراع العام المباشر لمدة 6 سنوات.">Vote les lois, le budget, contrôle le gouvernement, peut voter une motion de censure. Députés élus au suffrage universel direct pour 6 ans.</div><div class="inst-badge" data-fr="Législatif" data-ar="تشريعي">Législatif</div></div>
+      <div class="inst-card ic-legis"><div class="inst-icon">🏛️</div><div class="inst-name" data-fr="Sénat" data-ar="مجلس الشيوخ">Sénat</div><div class="inst-art">Art. 114–120</div><div class="inst-text" data-fr="Représente les Collectivités autonomes. 2/3 élus indirectement + 1/3 nommés par le Président. Mandat de 6 ans." data-ar="يمثل الجماعات المحلية المستقلة. ثلثان منتخبون بشكل غير مباشر + ثلث معيّنون من الرئيس. ولاية 6 سنوات.">Représente les Collectivités autonomes. 2/3 élus indirectement + 1/3 nommés par le Président. Mandat de 6 ans.</div><div class="inst-badge" data-fr="Législatif" data-ar="تشريعي">Législatif</div></div>
+      <div class="inst-card ic-ctrl"><div class="inst-icon">⚖️</div><div class="inst-name" data-fr="Conseil Constitutionnel" data-ar="المجلس الدستوري">Conseil Constitutionnel</div><div class="inst-art">Art. 173–183</div><div class="inst-text" data-fr="Contrôle la constitutionnalité des lois et surveille les élections. 9 membres pour 9 ans non renouvelables." data-ar="يراقب دستورية القوانين ويشرف على الانتخابات. 9 أعضاء لمدة 9 سنوات غير قابلة للتجديد.">Contrôle la constitutionnalité des lois et surveille les élections. 9 membres pour 9 ans non renouvelables.</div><div class="inst-badge" data-fr="Contrôle" data-ar="رقابي">Contrôle</div></div>
+      <div class="inst-card ic-judic"><div class="inst-icon">🏛️</div><div class="inst-name" data-fr="Cour Suprême" data-ar="المحكمة العليا">Cour Suprême</div><div class="inst-art">Art. 165–169</div><div class="inst-text" data-fr="Plus haute juridiction en matière judiciaire et administrative. Contrôle les élections locales. 41 membres pour 7 ans." data-ar="أعلى هيئة قضائية وإدارية. تشرف على الانتخابات المحلية. 41 عضوًا لمدة 7 سنوات.">Plus haute juridiction en matière judiciaire et administrative. Contrôle les élections locales. 41 membres pour 7 ans.</div><div class="inst-badge" data-fr="Judiciaire" data-ar="قضائي">Judiciaire</div></div>
+      <div class="inst-card ic-ctrl"><div class="inst-icon">🔍</div><div class="inst-name" data-fr="Cour des Comptes" data-ar="محكمة الحسابات">Cour des Comptes</div><div class="inst-art">Art. 184–189</div><div class="inst-text" data-fr="Contrôle l'exécution du budget de l'État et vérifie la bonne utilisation des fonds publics. 31 membres pour 6 ans." data-ar="تراقب تنفيذ ميزانية الدولة وتتحقق من حسن استخدام الأموال العامة. 31 عضوًا لمدة 6 سنوات.">Contrôle l'exécution du budget de l'État et vérifie la bonne utilisation des fonds publics. 31 membres pour 6 ans.</div><div class="inst-badge" data-fr="Contrôle" data-ar="رقابي">Contrôle</div></div>
+      <div class="inst-card ic-judic"><div class="inst-icon">⚒️</div><div class="inst-name" data-fr="Haute Cour de Justice" data-ar="محكمة العدل العليا">Haute Cour de Justice</div><div class="inst-art">Art. 190–196</div><div class="inst-text" data-fr="Juge le Président de la République et les membres du Gouvernement en cas de haute trahison. 15 membres." data-ar="تحاكم رئيس الجمهورية وأعضاء الحكومة في حالة الخيانة العظمى. 15 عضوًا.">Juge le Président de la République et les membres du Gouvernement en cas de haute trahison. 15 membres.</div><div class="inst-badge" data-fr="Judiciaire" data-ar="قضائي">Judiciaire</div></div>
+      <div class="inst-card ic-ind"><div class="inst-icon">📺</div><div class="inst-name">HAMA</div><div class="inst-art">Art. 214–219</div><div class="inst-text" data-fr="Haute Autorité des Médias et de l'Audiovisuel. Régule les médias et garantit la liberté d'expression. 9 membres pour 3 ans." data-ar="الهيئة العليا للإعلام والسمعي البصري. تنظّم الإعلام وتضمن حرية التعبير. 9 أعضاء لمدة 3 سنوات.">Haute Autorité des Médias et de l'Audiovisuel. Régule les médias et garantit la liberté d'expression. 9 membres pour 3 ans.</div><div class="inst-badge" data-fr="Indépendant" data-ar="مستقل">Indépendant</div></div>
+      <div class="inst-card ic-ind"><div class="inst-icon">🌐</div><div class="inst-name" data-fr="Commission Nationale des Droits de l'Homme" data-ar="اللجنة الوطنية لحقوق الإنسان">Commission Nationale des Droits de l'Homme</div><div class="inst-art">Art. 207–213</div><div class="inst-text" data-fr="Promeut et protège les droits humains. Autorité indépendante. 11 membres pour 4 ans." data-ar="تعزز حقوق الإنسان وتحمي. هيئة مستقلة. 11 عضوًا لمدة 4 سنوات.">Promeut et protège les droits humains. Autorité indépendante. 11 membres pour 4 ans.</div><div class="inst-badge" data-fr="Indépendant" data-ar="مستقل">Indépendant</div></div>
+      <div class="inst-card ic-cons"><div class="inst-icon">📊</div><div class="inst-name" data-fr="Conseil Économique, Social, Culturel et Environnemental" data-ar="المجلس الاقتصادي والاجتماعي والثقافي والبيئي">Conseil Économique, Social, Culturel et Environnemental</div><div class="inst-art">Art. 202–206</div><div class="inst-text" data-fr="Organe consultatif sur les questions économiques, sociales, culturelles et environnementales. 21 membres." data-ar="هيئة استشارية في الشؤون الاقتصادية والاجتماعية والثقافية والبيئية. 21 عضوًا.">Organe consultatif sur les questions économiques, sociales, culturelles et environnementales. 21 membres.</div><div class="inst-badge" data-fr="Consultatif" data-ar="استشاري">Consultatif</div></div>
+      <div class="inst-card ic-cons"><div class="inst-icon">👑</div><div class="inst-name" data-fr="Haut Conseil des Chefferies Traditionnelles" data-ar="المجلس الأعلى للزعامات التقليدية">Haut Conseil des Chefferies Traditionnelles</div><div class="inst-art">Art. 220–224</div><div class="inst-text" data-fr="Assemblée consultative sur les questions liées aux chefferies. Participe au règlement non juridictionnel des conflits." data-ar="جمعية استشارية في القضايا المتعلقة بالزعامات. تشارك في تسوية النزاعات بصورة غير قضائية.">Assemblée consultative sur les questions liées aux chefferies. Participe au règlement non juridictionnel des conflits.</div><div class="inst-badge" data-fr="Consultatif" data-ar="استشاري">Consultatif</div></div>
+      <div class="inst-card ic-ind"><div class="inst-icon">📮</div><div class="inst-name" data-fr="Médiature de la République" data-ar="وسيط الجمهورية">Médiature de la République</div><div class="inst-art">Art. 230–234</div><div class="inst-text" data-fr="Reçoit les réclamations des citoyens sur le fonctionnement de l'administration. Résout les conflits de manière pacifique." data-ar="يستقبل شكاوى المواطنين بشأن سير الإدارة. يحل النزاعات بطريقة سلمية.">Reçoit les réclamations des citoyens sur le fonctionnement de l'administration. Résout les conflits de manière pacifique.</div><div class="inst-badge" data-fr="Indépendant" data-ar="مستقل">Indépendant</div></div>
+      <div class="inst-card ic-ind"><div class="inst-icon">🗳️</div><div class="inst-name">ANGE</div><div class="inst-art">Art. 235–239</div><div class="inst-text" data-fr="Agence Nationale de Gestion des Élections. Organise et gère toutes les élections et référendums. Structure indépendante et permanente." data-ar="الوكالة الوطنية لإدارة الانتخابات. تنظم وتُدير جميع الانتخابات والاستفتاءات. هيكل مستقل ودائم.">Agence Nationale de Gestion des Élections. Organise et gère toutes les élections et référendums. Structure indépendante et permanente.</div><div class="inst-badge" data-fr="Indépendant" data-ar="مستقل">Indépendant</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 09 VIE ===== -->
+<section class="vie-section" id="vie">
+  <div class="container">
+    <div class="section-tag" style="color:var(--orange)" data-fr="09 · Applications concrètes" data-ar="09 · تطبيقات عملية">09 · Applications concrètes</div>
+    <h2 class="section-title"><span data-fr="La Constitution dans " data-ar="الدستور في ">La Constitution dans </span><span style="color:var(--orange)" data-fr="votre vie" data-ar="حياتك">votre vie</span></h2>
+    <p class="section-intro" data-fr="La Constitution n'est pas un document abstrait. Elle touche votre vie de tous les jours — quand votre enfant va à l'école, quand vous êtes arrêté, quand vous votez ou quand on veut vous exproprier. Voici comment elle vous protège." data-ar="الدستور ليس وثيقة مجردة. إنه يمس حياتك اليومية — حين يذهب طفلك إلى المدرسة، حين تُعتقل، حين تصوّت أو حين يُراد نزع ملكيتك. إليك كيف يحميك.">La Constitution n'est pas un document abstrait. Elle touche votre vie de tous les jours — quand votre enfant va à l'école, quand vous êtes arrêté, quand vous votez ou quand on veut vous exproprier. Voici comment elle vous protège.</p>
+    <div class="vie-grid fade-in">
+      <div class="vie-card">
+        <div class="vie-header vh-bleu"><div class="vie-emoji">🏫</div><div class="vie-scenario" data-fr="Votre enfant va à l'école" data-ar="طفلك يذهب إلى المدرسة">Votre enfant va à l'école</div><div class="vie-droit" data-fr="Droit à l'instruction — Art. 38" data-ar="الحق في التعليم — المادة 38">Droit à l'instruction — Art. 38</div></div>
+        <div class="vie-body"><ul class="vie-points">
+          <li><span data-fr="La Constitution garantit l'éducation à tous les enfants tchadiens." data-ar="يكفل الدستور التعليم لجميع الأطفال التشاديين.">La Constitution garantit l'éducation à tous les enfants tchadiens.</span></li>
+          <li><span data-fr="L'enseignement public doit être gratuit, laïc et accessible dans tout le pays." data-ar="التعليم العمومي مجاني وعلماني ومتاح في كل أنحاء البلاد.">L'enseignement public doit être gratuit, laïc et accessible dans tout le pays.</span></li>
+          <li><span data-fr="Si une école refuse votre enfant sans raison valable, vous pouvez contester ce refus." data-ar="إذا رفضت مدرسة قبول طفلك دون مسوّغ وجيه، يحق لك الطعن في ذلك الرفض.">Si une école refuse votre enfant sans raison valable, vous pouvez contester ce refus.</span></li>
+        </ul><div class="vie-recours" data-fr="Si ce droit est violé, vous pouvez vous adresser au tribunal administratif." data-ar="إذا انتُهك هذا الحق، يمكنك اللجوء إلى المحكمة الإدارية.">Si ce droit est violé, vous pouvez vous adresser au tribunal administratif.</div></div>
+      </div>
+      <div class="vie-card">
+        <div class="vie-header vh-rouge"><div class="vie-emoji">🚔</div><div class="vie-scenario" data-fr="Vous êtes arrêté par la police" data-ar="اعتقلتك الشرطة">Vous êtes arrêté par la police</div><div class="vie-droit" data-fr="Droits du prévenu — Art. 22–25" data-ar="حقوق المتهم — المواد 22–25">Droits du prévenu — Art. 22–25</div></div>
+        <div class="vie-body"><ul class="vie-points">
+          <li><span data-fr="L'arrestation arbitraire est interdite — vous ne pouvez être arrêté que pour une infraction prévue par la loi." data-ar="الاعتقال التعسفي محظور — لا يجوز توقيفك إلا بسبب جريمة ينص عليها القانون.">L'arrestation arbitraire est interdite — vous ne pouvez être arrêté que pour une infraction prévue par la loi.</span></li>
+          <li><span data-fr="Vous êtes présumé innocent jusqu'à ce qu'un tribunal prouve votre culpabilité." data-ar="أنت بريء حتى تثبت إدانتك أمام المحكمة.">Vous êtes présumé innocent jusqu'à ce qu'un tribunal prouve votre culpabilité.</span></li>
+          <li><span data-fr="Vous avez droit à un avocat et à un procès équitable." data-ar="يحق لك الاستعانة بمحامٍ والحصول على محاكمة عادلة.">Vous avez droit à un avocat et à un procès équitable.</span></li>
+        </ul><div class="vie-recours" data-fr="La torture et les traitements dégradants sont absolument interdits — Art. 19." data-ar="التعذيب والمعاملة المهينة محظوران حظرًا مطلقًا — المادة 19.">La torture et les traitements dégradants sont absolument interdits — Art. 19.</div></div>
+      </div>
+      <div class="vie-card">
+        <div class="vie-header vh-or"><div class="vie-emoji">🏡</div><div class="vie-scenario" data-fr="On veut vous exproprier" data-ar="يُراد نزع ملكيتك">On veut vous exproprier</div><div class="vie-droit" data-fr="Droit à la propriété — Art. 45–46" data-ar="حق الملكية — المواد 45–46">Droit à la propriété — Art. 45–46</div></div>
+        <div class="vie-body"><ul class="vie-points">
+          <li><span data-fr="La Constitution protège votre propriété privée : elle est inviolable et sacrée." data-ar="يحمي الدستور ملكيتك الخاصة: إنها لا تُمسّ ومقدسة.">La Constitution protège votre propriété privée : elle est inviolable et sacrée.</span></li>
+          <li><span data-fr="L'État ne peut vous exproprier que pour une raison d'utilité publique dûment constatée." data-ar="لا يجوز للدولة نزع ملكيتك إلا لمصلحة عامة ثابتة بالقانون.">L'État ne peut vous exproprier que pour une raison d'utilité publique dûment constatée.</span></li>
+          <li><span data-fr="Il doit vous verser une indemnisation juste et préalable avant toute prise de possession." data-ar="ويجب أن تحصل على تعويض عادل ومسبق قبل أي استيلاء.">Il doit vous verser une indemnisation juste et préalable avant toute prise de possession.</span></li>
+        </ul><div class="vie-recours" data-fr="Vous pouvez contester l'expropriation devant le tribunal compétent." data-ar="يمكنك الطعن في نزع الملكية أمام المحكمة المختصة.">Vous pouvez contester l'expropriation devant le tribunal compétent.</div></div>
+      </div>
+      <div class="vie-card">
+        <div class="vie-header vh-vert"><div class="vie-emoji">🗳️</div><div class="vie-scenario" data-fr="Vous allez voter" data-ar="ستُقدِم على التصويت">Vous allez voter</div><div class="vie-droit" data-fr="Droit de vote — Art. 6" data-ar="حق التصويت — المادة 6">Droit de vote — Art. 6</div></div>
+        <div class="vie-body"><ul class="vie-points">
+          <li><span data-fr="Le suffrage est universel, égal et secret : votre voix vaut autant que celle de n'importe qui." data-ar="الاقتراع عام ومتساوٍ وسري: صوتك يساوي صوت أي شخص آخر.">Le suffrage est universel, égal et secret : votre voix vaut autant que celle de n'importe qui.</span></li>
+          <li><span data-fr="Vous pouvez voter dès 18 ans si vous jouissez de vos droits civiques et politiques." data-ar="يمكنك التصويت من سن 18 إذا كنت تتمتع بحقوقك المدنية والسياسية.">Vous pouvez voter dès 18 ans si vous jouissez de vos droits civiques et politiques.</span></li>
+          <li><span data-fr="Le Conseil Constitutionnel surveille les élections et garantit leur régularité." data-ar="يشرف المجلس الدستوري على الانتخابات ويضمن نزاهتها.">Le Conseil Constitutionnel surveille les élections et garantit leur régularité.</span></li>
+        </ul><div class="vie-recours" data-fr="Tout résultat frauduleux peut être contesté devant le Conseil Constitutionnel." data-ar="يمكن الطعن في أي نتيجة مزوّرة أمام المجلس الدستوري.">Tout résultat frauduleux peut être contesté devant le Conseil Constitutionnel.</div></div>
+      </div>
+      <div class="vie-card">
+        <div class="vie-header vh-violet"><div class="vie-emoji">👷</div><div class="vie-scenario" data-fr="On vous refuse un emploi public" data-ar="رُفض طلب توظيفك في الوظيفة العمومية">On vous refuse un emploi public</div><div class="vie-droit" data-fr="Droit au travail — Art. 33, 35" data-ar="حق العمل — المادتان 33 و35">Droit au travail — Art. 33, 35</div></div>
+        <div class="vie-body"><ul class="vie-points">
+          <li><span data-fr="L'accès aux emplois publics est garanti à tout Tchadien sans discrimination." data-ar="الوصول إلى الوظائف العمومية مكفول لكل تشادي دون تمييز.">L'accès aux emplois publics est garanti à tout Tchadien sans discrimination.</span></li>
+          <li><span data-fr="Nul ne peut être lésé dans son travail à cause de son origine, opinions, religion ou sexe." data-ar="لا يجوز الإضرار بأي شخص في عمله بسبب أصله أو آرائه أو دينه أو جنسه.">Nul ne peut être lésé dans son travail à cause de son origine, opinions, religion ou sexe.</span></li>
+          <li><span data-fr="Vous avez droit à une rémunération juste pour votre travail." data-ar="يحق لك الحصول على أجر عادل مقابل عملك.">Vous avez droit à une rémunération juste pour votre travail.</span></li>
+        </ul><div class="vie-recours" data-fr="Une discrimination à l'emploi peut être portée devant les juridictions du travail." data-ar="يمكن رفع دعوى تمييز في العمل أمام المحاكم العمالية.">Une discrimination à l'emploi peut être portée devant les juridictions du travail.</div></div>
+      </div>
+      <div class="vie-card">
+        <div class="vie-header vh-teal"><div class="vie-emoji">📰</div><div class="vie-scenario" data-fr="Vous créez un journal" data-ar="أنت تنشئ صحيفة">Vous créez un journal</div><div class="vie-droit" data-fr="Liberté de presse — Art. 28" data-ar="حرية الصحافة — المادة 28">Liberté de presse — Art. 28</div></div>
+        <div class="vie-body"><ul class="vie-points">
+          <li><span data-fr="La liberté de presse et d'expression est constitutionnellement garantie à tous." data-ar="حرية الصحافة والتعبير مكفولتان دستوريًا للجميع.">La liberté de presse et d'expression est constitutionnellement garantie à tous.</span></li>
+          <li><span data-fr="La HAMA régule ce secteur et garantit votre liberté." data-ar="الـ HAMA تنظم هذا القطاع وتضمن حريتك.">La HAMA régule ce secteur et garantit votre liberté.</span></li>
+          <li><span data-fr="Limites : respect des droits d'autrui, ordre public et bonnes mœurs." data-ar="الحدود: احترام حقوق الآخرين والنظام العام والأخلاق الحميدة.">Limites : respect des droits d'autrui, ordre public et bonnes mœurs.</span></li>
+        </ul><div class="vie-recours" data-fr="La HAMA veille à la liberté et à la responsabilité des médias — Art. 216." data-ar="تسهر الـ HAMA على حرية وسائل الإعلام ومسؤوليتها — المادة 216.">La HAMA veille à la liberté et à la responsabilité des médias — Art. 216.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 10 LEXIQUE ===== -->
+<section class="lexique-section" id="lexique">
+  <div class="container">
+    <div class="section-tag" style="color:var(--or)" data-fr="10 · Lexique constitutionnel" data-ar="10 · المصطلحات الدستورية">10 · Lexique constitutionnel</div>
+    <h2 class="section-title" style="color:white;margin-bottom:16px"><span data-fr="Les Mots " data-ar="المصطلحات ">Les Mots </span><em style="color:var(--or);font-style:normal" data-fr="Importants" data-ar="المهمة">Importants</em></h2>
+    <p class="section-intro" style="color:rgba(255,255,255,.45);margin-bottom:40px" data-fr="Les termes juridiques expliqués simplement pour que chacun comprenne sa Constitution et puisse exercer ses droits en toute connaissance de cause." data-ar="مصطلحات قانونية مُشروحة ببساطة حتى يفهم الجميع دستورهم ويمارسوا حقوقهم عن دراية ووعي.">Les termes juridiques expliqués simplement pour que chacun comprenne sa Constitution et puisse exercer ses droits en toute connaissance de cause.</p>
+    <div class="lexique-grid fade-in">
+      <div class="lexique-item"><div class="lex-term" data-fr="Constitution" data-ar="الدستور">Constitution</div><div class="lex-text" data-fr="La Loi fondamentale et suprême d'un État. Toutes les autres lois doivent lui être conformes. Elle organise les pouvoirs et garantit les droits des citoyens." data-ar="القانون الأساسي والأعلى للدولة. يجب أن تنسجم معه جميع القوانين الأخرى. ينظم السلطات ويكفل حقوق المواطنين.">La Loi fondamentale et suprême d'un État. Toutes les autres lois doivent lui être conformes. Elle organise les pouvoirs et garantit les droits des citoyens.</div></div>
+      <div class="lexique-item"><div class="lex-term" data-fr="Préambule" data-ar="الديباجة">Préambule</div><div class="lex-text" data-fr="Introduction solennelle de la Constitution. Il énonce les valeurs et engagements fondamentaux du peuple. Il a force constitutionnelle." data-ar="المقدمة الرسمية للدستور. تُعلن القيم والالتزامات الأساسية للشعب. تحمل قوة دستورية.">Introduction solennelle de la Constitution. Il énonce les valeurs et engagements fondamentaux du peuple. Il a force constitutionnelle.</div></div>
+      <div class="lexique-item"><div class="lex-term" data-fr="Souveraineté" data-ar="السيادة">Souveraineté</div><div class="lex-text" data-fr="Pouvoir suprême d'un État d'exercer son autorité sans être soumis à une puissance extérieure. Au Tchad, la souveraineté appartient au Peuple." data-ar="السلطة العليا للدولة في ممارسة صلاحياتها دون أن تخضع لأي قوة خارجية. في تشاد، السيادة تعود للشعب.">Pouvoir suprême d'un État d'exercer son autorité sans être soumis à une puissance extérieure. Au Tchad, la souveraineté appartient au Peuple.</div></div>
+      <div class="lexique-item"><div class="lex-term" data-fr="Constitutionnalité" data-ar="الدستورية">Constitutionnalité</div><div class="lex-text" data-fr="Le fait pour une loi d'être conforme (ou contraire) à la Constitution. Une loi inconstitutionnelle est nulle et ne peut pas s'appliquer. Tout Tchadien peut la soulever lors d'un procès (Art. 180)." data-ar="كون القانون منسجمًا مع الدستور أو مخالفًا له. القانون غير الدستوري باطل ولا يُطبَّق. لكل تشادي إثارة ذلك أثناء محاكمة (المادة 180).">Le fait pour une loi d'être conforme (ou contraire) à la Constitution. Une loi inconstitutionnelle est nulle et ne peut pas s'appliquer. Tout Tchadien peut la soulever lors d'un procès (Art. 180).</div></div>
+      <div class="lexique-item"><div class="lex-term" data-fr="Suffrage universel" data-ar="الاقتراع العام">Suffrage universel</div><div class="lex-text" data-fr="Le droit de vote accordé à tous les citoyens sans discrimination. Au Tchad, dès 18 ans, tout citoyen peut voter." data-ar="حق التصويت الممنوح لجميع المواطنين دون تمييز. في تشاد، يحق لكل مواطن بلغ 18 سنة التصويت.">Le droit de vote accordé à tous les citoyens sans discrimination. Au Tchad, dès 18 ans, tout citoyen peut voter.</div></div>
+      <div class="lexique-item"><div class="lex-term" data-fr="Motion de censure" data-ar="ملتمس الرقابة">Motion de censure</div><div class="lex-text" data-fr="Procédure par laquelle l'Assemblée Nationale retire sa confiance au Gouvernement, pouvant entraîner sa démission." data-ar="إجراء تسحب بموجبه الجمعية الوطنية ثقتها من الحكومة، مما قد يُفضي إلى استقالتها.">Procédure par laquelle l'Assemblée Nationale retire sa confiance au Gouvernement, pouvant entraîner sa démission.</div></div>
+      <div class="lexique-item"><div class="lex-term" data-fr="Promulgation" data-ar="الإصدار">Promulgation</div><div class="lex-text" data-fr="Acte par lequel le Président de la République signe officiellement une loi, lui donnant force exécutoire." data-ar="الإجراء الذي يوقع بموجبه رئيس الجمهورية رسميًا قانونًا، ليكتسب به القوة التنفيذية.">Acte par lequel le Président de la République signe officiellement une loi, lui donnant force exécutoire.</div></div>
+      <div class="lexique-item"><div class="lex-term" data-fr="Référendum" data-ar="الاستفتاء">Référendum</div><div class="lex-text" data-fr="Vote direct du peuple sur une question précise. Le résultat est proclamé par le Conseil Constitutionnel." data-ar="تصويت مباشر للشعب على مسألة محددة. تُعلن نتائجه المجلس الدستوري.">Vote direct du peuple sur une question précise. Le résultat est proclamé par le Conseil Constitutionnel.</div></div>
+      <div class="lexique-item"><div class="lex-term" data-fr="Inamovibilité" data-ar="عدم القابلية للعزل">Inamovibilité</div><div class="lex-text" data-fr="Garantie pour les magistrats de ne pas être mutés, révoqués ou sanctionnés pour leurs décisions judiciaires. Assure leur indépendance." data-ar="ضمانة للقضاة بعدم نقلهم أو عزلهم أو محاسبتهم على قراراتهم القضائية. يكفل استقلاليتهم.">Garantie pour les magistrats de ne pas être mutés, révoqués ou sanctionnés pour leurs décisions judiciaires. Assure leur indépendance.</div></div>
+      <div class="lexique-item"><div class="lex-term" data-fr="Mandat" data-ar="الولاية">Mandat</div><div class="lex-text" data-fr="Durée pendant laquelle un élu ou un nommé exerce ses fonctions. Exemple : 7 ans pour le Président de la République." data-ar="المدة التي يمارس فيها المنتخب أو المعيَّن مهامه. مثال: 7 سنوات لرئيس الجمهورية.">Durée pendant laquelle un élu ou un nommé exerce ses fonctions. Exemple : 7 ans pour le Président de la République.</div></div>
+      <div class="lexique-item"><div class="lex-term" data-fr="Haute Trahison" data-ar="الخيانة العظمى">Haute Trahison</div><div class="lex-text" data-fr="Faute grave commise par le Président ou un ministre dans l'exercice de ses fonctions. Jugée par la Haute Cour de Justice." data-ar="جريمة جسيمة يرتكبها الرئيس أو وزير في ممارسة مهامه. تختص بها محكمة العدل العليا.">Faute grave commise par le Président ou un ministre dans l'exercice de ses fonctions. Jugée par la Haute Cour de Justice.</div></div>
+      <div class="lexique-item"><div class="lex-term" data-fr="Décentralisation" data-ar="اللامركزية">Décentralisation</div><div class="lex-text" data-fr="Transfert de certains pouvoirs de l'État central vers les Collectivités territoriales (régions, communes). Renforce la démocratie locale." data-ar="نقل بعض صلاحيات الدولة المركزية إلى الجماعات المحلية (أقاليم، بلديات). يعزز الديمقراطية المحلية.">Transfert de certains pouvoirs de l'État central vers les Collectivités territoriales (régions, communes). Renforce la démocratie locale.</div></div>
+      <div class="lexique-item"><div class="lex-term" data-fr="État de droit" data-ar="دولة القانون">État de droit</div><div class="lex-text" data-fr="Système dans lequel l'État est soumis à des règles juridiques qu'il doit respecter, au même titre que les citoyens. Garantit l'égalité devant la loi." data-ar="نظام تخضع فيه الدولة لقواعد قانونية يجب عليها احترامها مثلها مثل المواطنين. يضمن المساواة أمام القانون.">Système dans lequel l'État est soumis à des règles juridiques qu'il doit respecter, au même titre que les citoyens. Garantit l'égalité devant la loi.</div></div>
+      <div class="lexique-item"><div class="lex-term">ANGE</div><div class="lex-text" data-fr="Agence Nationale de Gestion des Élections. Structure indépendante et permanente chargée d'organiser et gérer toutes les élections au Tchad." data-ar="الوكالة الوطنية لإدارة الانتخابات. هيكل مستقل ودائم مكلف بتنظيم وإدارة جميع الانتخابات في تشاد.">Agence Nationale de Gestion des Élections. Structure indépendante et permanente chargée d'organiser et gérer toutes les élections au Tchad.</div></div>
+      <div class="lexique-item"><div class="lex-term">HAMA</div><div class="lex-text" data-fr="Haute Autorité des Médias et de l'Audiovisuel. Garantit la liberté de presse et régule les médias au Tchad. 9 membres pour 3 ans." data-ar="الهيئة العليا للإعلام والسمعي البصري. تضمن حرية الصحافة وتنظّم الإعلام في تشاد. 9 أعضاء لمدة 3 سنوات.">Haute Autorité des Médias et de l'Audiovisuel. Garantit la liberté de presse et régule les médias au Tchad. 9 membres pour 3 ans.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-title" data-fr="Conseil Constitutionnel — République du Tchad" data-ar="المجلس الدستوري — جمهورية تشاد">Conseil Constitutionnel — République du Tchad</div>
+  <p class="footer-sub" data-fr="Ce guide citoyen a pour vocation de rendre la Constitution du Tchad accessible à chaque Tchadien, quel que soit son niveau d'instruction. Il ne se substitue pas au texte officiel." data-ar="يهدف هذا الدليل المواطني إلى جعل دستور تشاد في متناول كل تشادي بصرف النظر عن مستواه الدراسي. لا يُعوِّض النصَّ الرسمي.">Ce guide citoyen a pour vocation de rendre la Constitution du Tchad accessible à chaque Tchadien, quel que soit son niveau d'instruction. Il ne se substitue pas au texte officiel.</p>
+  <p class="footer-meta" data-fr="Constitution révisée — Octobre 2025 · Loi constitutionnelle N° 001/PC/2025 du 03 octobre 2025 · Promulguée le 08 octobre 2025" data-ar="الدستور المُعدَّل — أكتوبر 2025 · القانون الدستوري رقم 001/PC/2025 المؤرخ 03 أكتوبر 2025 · صدر في 08 أكتوبر 2025">Constitution révisée — Octobre 2025 · Loi constitutionnelle N° 001/PC/2025 du 03 octobre 2025 · Promulguée le 08 octobre 2025</p>
+  <p class="footer-meta" style="margin-top:8px" data-fr="Unité · Travail · Progrès" data-ar="الوحدة · العمل · التقدم">Unité · Travail · Progrès</p>
+</footer>
+
+<script>
+// ===== LANGUAGE SWITCHER =====
+function setLang(lang) {
+  const html = document.documentElement;
+  html.setAttribute('lang', lang);
+  html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+  // Update button states
+  document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+  document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+
+  // Update page title
+  document.title = lang === 'ar'
+    ? 'الدستور مشروحًا للجميع — دليل المواطن تشاد'
+    : 'La Constitution expliquée à tous — Guide Citoyen Tchad';
+
+  // Translate all elements with data-fr / data-ar
+  document.querySelectorAll('[data-fr][data-ar]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (val !== null) el.innerHTML = val;
+  });
+
+  // Save preference
+  localStorage.setItem('guide-lang', lang);
+}
+
+// Restore language on load
+const savedLang = localStorage.getItem('guide-lang');
+if (savedLang && savedLang !== 'fr') setLang(savedLang);
+
+// ===== NAV ACTIVE STATE =====
+const sections = document.querySelectorAll('section[id]');
+const navBtns = document.querySelectorAll('.nav-btn');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navBtns.forEach(b => b.classList.remove('active'));
+      const active = document.querySelector(`.nav-btn[href="#${e.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, {threshold: 0.3});
+sections.forEach(s => observer.observe(s));
+
+// ===== FADE-IN =====
+const faders = document.querySelectorAll('.fade-in');
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold: 0.1});
+faders.forEach(f => fadeObs.observe(f));
+</script>
+</body>
+</html>
